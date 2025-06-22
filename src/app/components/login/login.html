@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6 mb-4">
+      <img
+        src="https://www.shutterstock.com/image-vector/hotel-booking-mobile-phone-easy-600nw-1978894262.jpg"
+        class="img-fluid rounded-4 shadow"
+        alt="Login Illustration"
+      />
+    </div>
+
+    <div class="col-md-5">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4">🔐 Log In</h2>
+
+          <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="email" class="form-label">📧 Email</label>
+              <input
+                type="email"
+                [(ngModel)]="credentials.email"
+                name="email"
+                id="email"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">🔒 Password</label>
+              <input
+                type="password"
+                [(ngModel)]="credentials.password"
+                name="password"
+                id="password"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success rounded-pill">
+                ✅ Login
+              </button>
+            </div>
+          </form>
+
+          <hr />
+          <p class="text-center mt-3">
+            Don't have an account?
+            <a routerLink="/register" class="text-decoration-none">Register</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

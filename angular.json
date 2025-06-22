@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Frontend": {
+    "SmartHotelManagement": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -22,7 +22,6 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "server": "src/main.server.ts",
@@ -59,10 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Frontend:build:production"
+              "buildTarget": "SmartHotelManagement:build:production"
             },
             "development": {
-              "buildTarget": "Frontend:build:development"
+              "buildTarget": "SmartHotelManagement:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,6 +88,6 @@
     }
   },
   "cli": {
-    "analytics": "786c292c-8aa3-4cfa-a6fd-66ccac86768f"
+    "analytics": "c0db45ba-89ed-40ef-895a-64613a908790"
   }
 }
