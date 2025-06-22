@@ -25,6 +25,8 @@ export class Registration {
 
   onSubmit() {
     // 👇👇👇👇👇👇👇👇 Make Uncomment - When Cors is Added and Backend is Connect with Frontend Successfully 👇👇👇👇👇👇👇👇
+    console.log('Sending data:', this.user);
+
     // this.authService.register(this.user).subscribe({
     //   next: (res) => {
     //     alert('Registration successful!');
