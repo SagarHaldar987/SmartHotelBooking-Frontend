@@ -1,0 +1,28 @@
+<body style="background-color: rgb(138, 138, 130);">
+ 
+    <form *ngIf="showRent">
+      <h2>Rent a Home</h2>
+      <label for="houseType">House Type</label><br />
+      <input type="text" id="houseType" name="houseType" /><br /><br />
+   
+      <label for="location">Location</label><br />
+      <input type="text" id="location" name="location" /><br /><br />
+   
+      <label for="contactNumber">Contact Number</label><br />
+      <input type="text" id="contactNumber" name="contactNumber" /><br /><br />
+   
+      <button id="post" name="post">Post</button>
+    </form>
+   
+    <form *ngIf="showSearch">
+      <h2>Search Home</h2>
+      <label for="searchText">Search</label><br />
+      <input type="text" id="searchText" name="searchText" /><br /><br />
+   
+      <label for="location">Location</label><br />
+      <input type="text" id="location" name="location" /><br /><br />
+   
+      <button id="search" name="search">Search</button>
+    </form>
+   
+  </body>

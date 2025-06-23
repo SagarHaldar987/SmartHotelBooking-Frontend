@@ -1,0 +1,9 @@
+<body style="background-color: #52BE80;">
+    <nav class="nav">
+      <h1>Welcome to RentAHome</h1>
+      <a id="rentHome" [routerLink]="['/home']" [queryParams]="{ flag: 1 }">Rent a Home</a> |
+      <a id="searchHome" [routerLink]="['/home']" [queryParams]="{ flag: 2 }">Search Home</a>
+    </nav>
+ 
+    <router-outlet></router-outlet>
+  </body>

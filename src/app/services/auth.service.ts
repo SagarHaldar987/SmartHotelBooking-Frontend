@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,9 @@ import { environment } from '../../environments/environment';
 
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cookieService: CookieService) {
    // this.loadUserRoleOnAppInit();
   }
-  
   
   // ✅ Register Method
   register(userData: any): Observable<any> {
@@ -26,20 +27,34 @@ export class AuthService {
     );
   }
 
+
+
   // ✅ Login Method (Commented for now)
-  login(credentials: any): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}/login`, credentials);
+  login(credentials: {email: string; password: string}): Observable<any> {
+    return this.http.post<any>(`${environment.apiBaseUrl}/Auth/login`, credentials);
   }
   
-
-  // ✅ Decode JWT Token
-  decodeToken(token: string): any {
-    try {
-      const payload = token.split('.')[1];
-      const decoded = atob(payload); // base64 decode
-      return JSON.parse(decoded);
-    } catch (e) {
-      return null;
-    }
+  
+  saveUserData(data: any): void {
+      this.cookieService.set('token', data.token);
+      this.cookieService.set('role', data.role);
+      this.cookieService.set('name', data.name);
+      this.cookieService.set('email', data.email);
+      this.cookieService.set('userId', data.userId);
   }
+  
+  
+  getRole(): string | null {
+    return this.cookieService.get('role');
+  }
+  
+  
+  isLoggedIn(): boolean {
+    return this.cookieService.check('token');
+  }
+  
+  logout(): void {
+    this.cookieService.deleteAll();
+  } 
+  
 }
