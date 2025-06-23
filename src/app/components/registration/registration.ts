@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-// import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./registration.css'],
   imports: [FormsModule, CommonModule, RouterModule],
 })
-export class Registration {
+export class Registration implements OnInit {
   user = {
     name: '',
     email: '',
@@ -19,31 +19,41 @@ export class Registration {
     role: 'User',
     contactNumber: ''
   };
-
-  // 👇👇👇👇👇👇👇👇 Make Uncomment - When Cors is Added and Backend is Connect with Frontend Successfully 👇👇👇👇👇👇👇👇
-  // constructor(private authService: AuthService) {}
-
+  
+  constructor(private authService: AuthService) {}
+  ngOnInit(): void {
+    // throw new Error('Method not implemented.');
+    console.log('Registration component initialized');
+  }
   onSubmit() {
-    // 👇👇👇👇👇👇👇👇 Make Uncomment - When Cors is Added and Backend is Connect with Frontend Successfully 👇👇👇👇👇👇👇👇
-    console.log('Sending data:', this.user);
+    // console.log('Sending data:', this.user);
+    this.authService.register(this.user).subscribe({
+      next: (res : any) => {
+        alert('Registration successful!');
+        console.log(res);
+      },
+      error: (err : any) => {
+        alert('Registration failed!');
+        console.error(err);
+      }
+    });
 
-    // this.authService.register(this.user).subscribe({
-    //   next: (res) => {
-    //     alert('Registration successful!');
-    //     console.log(res);
-    //   },
-    //   error: (err) => {
-    //     alert('Registration failed!');
-    //     console.error(err);
-    //   }
-    // });
-
-
-    // ✅ Temporary version without backend- Remove Later
-    alert('Submitted! (Fake)');
-    console.log('User data:', this.user);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

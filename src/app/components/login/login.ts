@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'; 
-// import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,43 +19,42 @@ export class Login {
   };
 
   constructor(
-    private router: Router
-    // private authService: AuthService
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   onSubmit() {
     // ✅ MOCK Response from backend
     const mockResponse = {
       message: 'Login successful',
-      name: 'Sagar',
-      email: 'sagar@example.com',
-      role: 'Manager', // Change to 'User' to test different routes
+      name: 'John Doe', // You can replace this with dynamic input if needed
+      email: this.credentials.email, // Use user input from the form
+      // role: this.credentials.email === 'manager@example.com' ? 'Manager' : 'User', // Mock role based on email
+      role: this.credentials.email,
       token: 'FAKE.JWT.TOKEN'
     };
 
     // ✅ Save JWT token to localStorage or cookie
-    // document.cookie = `jwt=${mockResponse.token}; path=/`;
+    document.cookie = `jwt=${mockResponse.token}; path=/`;
     // OR
-    localStorage.setItem('jwt', mockResponse.token);
+    // localStorage.setItem('jwt', mockResponse.token);
 
     // ✅ (Mock) Decode token
-    // const tokenPayload = this.authService.decodeToken(mockResponse.token);
-    // const role = tokenPayload.role;
+    const tokenPayload = this.authService.decodeToken(mockResponse.token);
+    const role = tokenPayload.role;
 
-    const role = mockResponse.role; // Replace with tokenPayload.role when backend is ready
+    // const role = mockResponse.role; // Replace with tokenPayload.role when backend is ready
 
     alert(`Login successful ✅ Logged in as ${role}`);
     this.navigateBasedOnRole(role);
 
     // ✅ ACTUAL API CALL (when backend is ready)
-    /*
     this.authService.login(this.credentials).subscribe((res) => {
       localStorage.setItem('jwt', res.token);
       const decoded = this.authService.decodeToken(res.token);
       const role = decoded.role;
       this.navigateBasedOnRole(role);
     });
-    */
   }
 
   navigateBasedOnRole(role: string) {
