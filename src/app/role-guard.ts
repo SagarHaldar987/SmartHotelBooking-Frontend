@@ -17,7 +17,10 @@ export class RoleGuard implements CanActivate {
       return true;
     } else {
       // Redirect to unauthorized page or login
+      alert('Access denied. You do not have permission to view this page.');
       this.router.navigate(['/unauthorized']);
+      // OR we can redirect to Home/Login Page
+      // this.router.navigate(['/']);
       return false;
     }
   }

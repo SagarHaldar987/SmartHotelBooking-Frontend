@@ -23,7 +23,7 @@ export class Registration implements OnInit {
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
-    console.log('Registration component initialized');
+    // console.log('Registration component initialized');
   }
   onSubmit() {
     // console.log('Sending data:', this.user);
@@ -37,12 +37,8 @@ export class Registration implements OnInit {
         console.error(err);
       }
     });
-
   }
 }
-
-
-
 
 
 

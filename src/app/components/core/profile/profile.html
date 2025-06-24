@@ -1,0 +1,12 @@
+<div class="profile-container" *ngIf="isLoggedIn">
+  <h2>User Profile</h2>
+  <p><strong>Name:</strong> {{ name }}</p>
+  <p><strong>Email:</strong> {{ email }}</p>
+  <p><strong>Role:</strong> {{ role }}</p>
+
+  <button (click)="logout()" class="logout-button">Logout</button>
+</div>
+
+<div *ngIf="!isLoggedIn">
+  <p>You are not logged in.</p>
+</div>
