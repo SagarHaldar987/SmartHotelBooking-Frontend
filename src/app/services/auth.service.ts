@@ -1,60 +1,140 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
-
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
+  private loggedIn: BehaviorSubject<boolean>;
+  private role: BehaviorSubject<string>;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
-   // this.loadUserRoleOnAppInit();
+    // ✅ Initialize BehaviorSubjects after cookieService is available
+    this.loggedIn = new BehaviorSubject<boolean>(this.cookieService.check('token'));
+    this.role = new BehaviorSubject<string>(this.cookieService.get('role') || '');
   }
-  
-  // ✅ Register Method
+
+  // Observable streams for components to subscribe to
+  get isLoggedIn$(): Observable<boolean> {
+    return this.loggedIn.asObservable();
+  }
+
+  get role$(): Observable<string> {
+    return this.role.asObservable();
+  }
+
+  // Register method
   register(userData: any): Observable<any> {
-    console.log('Register API called with data:', userData); // Log the input data
+    console.log('Register API called with data:', userData);
     return this.http.post(`${environment.apiBaseUrl}/Auth/register`, userData).pipe(
-      tap(response => console.log('API Response:', response)), // Log the response
+      tap(response => console.log('API Response:', response)),
       catchError(error => {
-        console.error('API Error:', error); // Log any errors
+        console.error('API Error:', error);
         throw error;
       })
     );
   }
 
-
-
-  // ✅ Login Method (Commented for now)
-  login(credentials: {email: string; password: string}): Observable<any> {
+  // Login method
+  login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post<any>(`${environment.apiBaseUrl}/Auth/login`, credentials);
   }
-  
-  
+
+  // Save user data and update state
   saveUserData(data: any): void {
-      this.cookieService.set('token', data.token);
-      this.cookieService.set('role', data.role);
-      this.cookieService.set('name', data.name);
-      this.cookieService.set('email', data.email);
-      this.cookieService.set('userId', data.userId);
+    this.cookieService.set('token', data.token);
+    this.cookieService.set('role', data.role);
+    this.cookieService.set('name', data.name);
+    this.cookieService.set('email', data.email);
+    this.cookieService.set('userId', data.userId);
+
+    this.loggedIn.next(true);
+    this.role.next(data.role);
   }
-  
-  
+
+  // Get role from cookie
   getRole(): string | null {
     return this.cookieService.get('role');
   }
-  
-  
+
+  // Check login status
   isLoggedIn(): boolean {
     return this.cookieService.check('token');
   }
-  
+
+  // Logout and update state
   logout(): void {
     this.cookieService.deleteAll();
-  } 
-  
+    this.loggedIn.next(false);
+    this.role.next('');
+  }
 }
+
+
+
+
+
+
+
+
+// import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+// import { catchError, Observable, tap, throwError } from 'rxjs';
+// import { environment } from '../../environments/environment';
+// import { CookieService } from 'ngx-cookie-service';
+
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+
+// export class AuthService {
+
+//   constructor(private http: HttpClient, private cookieService: CookieService) {}
+  
+//   // ✅ Register Method
+//   register(userData: any): Observable<any> {
+//     console.log('Register API called with data:', userData); // Log the input data
+//     return this.http.post(`${environment.apiBaseUrl}/Auth/register`, userData).pipe(
+//       tap(response => console.log('API Response:', response)), // Log the response
+//       catchError(error => {
+//         console.error('API Error:', error); // Log any errors
+//         throw error;
+//       })
+//     );
+//   }
+
+
+
+//   // ✅ Login Method (Commented for now)
+//   login(credentials: {email: string; password: string}): Observable<any> {
+//     return this.http.post<any>(`${environment.apiBaseUrl}/Auth/login`, credentials);
+//   }
+  
+  
+//   saveUserData(data: any): void {
+//       this.cookieService.set('token', data.token);
+//       this.cookieService.set('role', data.role);
+//       this.cookieService.set('name', data.name);
+//       this.cookieService.set('email', data.email);
+//       this.cookieService.set('userId', data.userId);
+//   }
+  
+  
+//   getRole(): string | null {
+//     return this.cookieService.get('role');
+//   }
+  
+  
+//   isLoggedIn(): boolean {
+//     return this.cookieService.check('token');
+//   }
+  
+//   logout(): void {
+//     this.cookieService.deleteAll();
+//   } 
+  
+// }
