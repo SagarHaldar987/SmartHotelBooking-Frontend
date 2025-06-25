@@ -1,13 +1,15 @@
+// Description: This file defines the routes for the Angular application, mapping paths to components.
+// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { Registration } from './components/registration/registration';
 import { Login } from './components/login/login';
 import { UserDashboard } from './components/user/user-dashboard/user-dashboard';
 import { ManagerDashboard } from './components/manager-dashboard/manager-dashboard';
-// import { AuthGuard } from './auth-guard';
+import { AuthGuard} from './auth-guard';
 import { Home } from './components/core/home/home';
-import { Hotel } from './components/core/hotel/hotel';
-import { profile } from 'console';
+import { HotelComponent } from './components/core/hotel/hotel';
 import { Profile } from './components/core/profile/profile';
+import { RoomComponent } from './components/core/room/room';
 
 
 export const routes: Routes = [
@@ -17,7 +19,8 @@ export const routes: Routes = [
   { path: 'login', component: Login },
   { path: 'user-dashboard', component: UserDashboard},
   { path: 'manager-dashboard', component: ManagerDashboard},
-  {path: 'hotel', component: Hotel},
+  {path: 'hotel', component: HotelComponent}, // Assuming authGuard is defined in your auth-guard file
+  {path: 'rooms/:hotelID', component: RoomComponent }, // Lazy loading rooms module
   {path: 'profile', component: Profile},
   { path: '**', redirectTo: '/home' },
 ];

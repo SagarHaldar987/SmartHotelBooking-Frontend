@@ -30,7 +30,7 @@ export class Login {
           if (response.role === 'Manager') {
             this.router.navigate(['/manager-dashboard']);
           } else if (response.role === 'User') {
-            this.router.navigate(['/user-dashboard']);
+            this.router.navigate(['/home']);
           } else {
             this.router.navigate(['/']);
           }

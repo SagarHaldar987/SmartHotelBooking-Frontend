@@ -1,0 +1,18 @@
+/* src/app/components/room/room.css */
+.room-card .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.room-card .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+  color: #007bff;
+}
+
+.badge {
+  font-size: 0.9em;
+  padding: 0.4em 0.6em;
+}

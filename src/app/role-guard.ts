@@ -1,3 +1,6 @@
+// Role Guard Implementation in Angular
+// This guard checks if the user has the required role to access a route.
+// src/app/role-guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';

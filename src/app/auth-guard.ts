@@ -1,3 +1,7 @@
+// This file defines an authentication guard for Angular routes.
+// It checks if the user is logged in before allowing access to certain routes.
+// If the user is not authenticated, it redirects them to the login page.
+// src/app/auth-guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
