@@ -11,7 +11,8 @@ export interface Room {
   price: number;
   availability: boolean;
   features: string;
-  imageUrl: string;
+  // imageUrl: string;
+  imageUrl: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg'; // Optional property for image URL
 }
 
 @Injectable({

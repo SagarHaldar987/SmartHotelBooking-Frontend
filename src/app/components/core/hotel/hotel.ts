@@ -1,8 +1,9 @@
 // src/app/components/hotel/hotel.ts
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { HotelService, Hotel } from '../../../services/hotel.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hotel',
@@ -10,14 +11,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './hotel.css',
   imports: [CommonModule],
 })
-
-export class HotelComponent implements OnInit {
+export class HotelComponent implements OnInit, OnDestroy {
   hotels: Hotel[] = [];
+  private hotelSubscription: Subscription | undefined;
 
-  constructor(private hotelService: HotelService, private router: Router, private cdr : ChangeDetectorRef) {}
+  constructor(
+    private hotelService: HotelService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.hotelService.getAllHotels().subscribe({
+    this.hotelSubscription = this.hotelService.getAllHotels().subscribe({
       next: (data) => {
         this.hotels = data;
         console.log('Hotels fetched successfully:', this.hotels);
@@ -35,7 +40,62 @@ export class HotelComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.hotelSubscription) {
+      this.hotelSubscription.unsubscribe();
+      console.log('Hotel subscription cleaned up.');
+    }
+  }
+
   viewRooms(hotelID: number): void {
     this.router.navigate(['/rooms', hotelID]);
   }
 }
+
+
+
+
+
+
+
+
+// import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+// import { HotelService, Hotel } from '../../../services/hotel.service';
+// import { Router } from '@angular/router';
+// import { CommonModule } from '@angular/common';
+
+// @Component({
+//   selector: 'app-hotel',
+//   templateUrl: './hotel.html',
+//   styleUrl: './hotel.css',
+//   imports: [CommonModule],
+// })
+
+// export class HotelComponent implements OnInit {
+//   hotels: Hotel[] = [];
+
+//   constructor(private hotelService: HotelService, private router: Router, private cdr : ChangeDetectorRef) {}
+
+//   ngOnInit(): void {
+//     this.hotelService.getAllHotels().subscribe({
+//       next: (data) => {
+//         this.hotels = data;
+//         console.log('Hotels fetched successfully:', this.hotels);
+//         this.cdr.detectChanges();
+//       },
+//       error: (err) => {
+//         if (err.status === 401) {
+//           console.warn('Unauthorized access. Redirecting to login...');
+//           this.router.navigate(['/login']);
+//         }
+//       },
+//       complete: () => {
+//         console.log('Hotel fetch completed.');
+//       }
+//     });
+//   }
+
+//   viewRooms(hotelID: number): void {
+//     this.router.navigate(['/rooms', hotelID]);
+//   }
+// }
