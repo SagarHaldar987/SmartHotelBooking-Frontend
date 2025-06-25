@@ -1,54 +1,45 @@
 // src/app/components/hotel/hotel.ts
-import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
+// src/app/components/hotel/hotel.ts
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit
+} from '@angular/core';
 import { HotelService, Hotel } from '../../../services/hotel.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-hotel',
   templateUrl: './hotel.html',
-  styleUrl: './hotel.css',
+  styleUrls: ['./hotel.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   imports: [CommonModule],
 })
-export class HotelComponent implements OnInit, OnDestroy {
-  hotels: Hotel[] = [];
-  private hotelSubscription: Subscription | undefined;
+export class HotelComponent implements OnInit {
+  hotels$!: Observable<Hotel[]>;
+  userRole: string = '';
 
   constructor(
     private hotelService: HotelService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.hotelSubscription = this.hotelService.getAllHotels().subscribe({
-      next: (data) => {
-        this.hotels = data;
-        console.log('Hotels fetched successfully:', this.hotels);
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        if (err.status === 401) {
-          console.warn('Unauthorized access. Redirecting to login...');
-          this.router.navigate(['/login']);
-        }
-      },
-      complete: () => {
-        console.log('Hotel fetch completed.');
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.hotelSubscription) {
-      this.hotelSubscription.unsubscribe();
-      console.log('Hotel subscription cleaned up.');
-    }
+    this.userRole = this.authService.getRole() ?? '';
+    this.hotels$ = this.hotelService.getAllHotels();
   }
 
   viewRooms(hotelID: number): void {
     this.router.navigate(['/rooms', hotelID]);
+  }
+
+  addHotel(): void {
+    this.router.navigate(['/add-hotel']);
   }
 }
 

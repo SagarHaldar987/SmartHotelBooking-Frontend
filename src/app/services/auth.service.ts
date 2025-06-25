@@ -1,3 +1,9 @@
+// AuthService for handling user authentication
+// This service manages user registration, login, and session state using cookies.
+// It uses Angular's HttpClient for API calls and ngx-cookie-service for cookie management.
+// It also provides observables for components to reactively check login status and user role.
+// The service is provided in the root injector, making it available throughout the application.
+// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
@@ -7,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private loggedIn: BehaviorSubject<boolean>;
   private role: BehaviorSubject<string>;
@@ -72,69 +79,3 @@ export class AuthService {
     this.role.next('');
   }
 }
-
-
-
-
-
-
-
-
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { catchError, Observable, tap, throwError } from 'rxjs';
-// import { environment } from '../../environments/environment';
-// import { CookieService } from 'ngx-cookie-service';
-
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-
-// export class AuthService {
-
-//   constructor(private http: HttpClient, private cookieService: CookieService) {}
-  
-//   // ✅ Register Method
-//   register(userData: any): Observable<any> {
-//     console.log('Register API called with data:', userData); // Log the input data
-//     return this.http.post(`${environment.apiBaseUrl}/Auth/register`, userData).pipe(
-//       tap(response => console.log('API Response:', response)), // Log the response
-//       catchError(error => {
-//         console.error('API Error:', error); // Log any errors
-//         throw error;
-//       })
-//     );
-//   }
-
-
-
-//   // ✅ Login Method (Commented for now)
-//   login(credentials: {email: string; password: string}): Observable<any> {
-//     return this.http.post<any>(`${environment.apiBaseUrl}/Auth/login`, credentials);
-//   }
-  
-  
-//   saveUserData(data: any): void {
-//       this.cookieService.set('token', data.token);
-//       this.cookieService.set('role', data.role);
-//       this.cookieService.set('name', data.name);
-//       this.cookieService.set('email', data.email);
-//       this.cookieService.set('userId', data.userId);
-//   }
-  
-  
-//   getRole(): string | null {
-//     return this.cookieService.get('role');
-//   }
-  
-  
-//   isLoggedIn(): boolean {
-//     return this.cookieService.check('token');
-//   }
-  
-//   logout(): void {
-//     this.cookieService.deleteAll();
-//   } 
-  
-// }

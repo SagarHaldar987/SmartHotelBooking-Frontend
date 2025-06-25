@@ -1,45 +1,80 @@
-<!-- src/app/components/core/hotel/hotel.html -->
-<div class="container mt-4">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <div *ngFor="let hotel of hotels" class="col">
-        <div class="card h-100 shadow-sm hotel-card" (click)="viewRooms(hotel.hotelID)" style="cursor: pointer;">
-          <img [src]="hotel.imageUrl" class="card-img-top" alt="{{ hotel.name }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ hotel.name }}</h5>
-            <p class="card-text"><strong>Location:</strong> {{ hotel.location }}</p>
-            <p class="card-text"><strong>Rating:</strong> 
-              <span class="text-warning">
-                <ng-container *ngFor="let star of [].constructor(hotel.rating)">
-                  ★
-                </ng-container>
-              </span>
-            </p>
+<!-- hotel.html -->
+<div class="container my-4">
+  <!-- Add Hotel Button (Visible only to Managers) -->
+  <div class="text-end mb-3" *ngIf="userRole === 'Manager'">
+    <button class="btn btn-primary" (click)="addHotel()">Add Hotel</button>
+  </div>
+
+  <div class="row">
+    <ng-container *ngIf="hotels$ | async as hotels; else loading">
+      <div *ngIf="hotels.length > 0; else noHotels">
+        <div *ngFor="let hotel of hotels" class="col-md-6 col-lg-4 mb-4">
+          <div class="card shadow-sm h-100 hotel-card" (click)="viewRooms(hotel.hotelID)" style="cursor: pointer;">
+            <img [src]="hotel.imageUrl" class="card-img-top" alt="{{ hotel.name }}" style="height: 200px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title text-primary">{{ hotel.name }}</h5>
+              <p class="card-text"><strong>Location:</strong> {{ hotel.location }}</p>
+              <p class="card-text">
+                <strong>Rating:</strong>
+                <span class="text-warning">
+                  <ng-container *ngFor="let star of [].constructor(hotel.rating)">★</ng-container>
+                </span>
+              </p>
+            </div>
           </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Loading and Empty States -->
+    <ng-template #loading>
+      <p>Loading hotels...</p>
+    </ng-template>
+
+    <ng-template #noHotels>
+      <p>No hotels available.</p>
+    </ng-template>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container mt-4">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div *ngFor="let hotel of hotels" class="col">
+      <div
+        class="card h-100 shadow-sm hotel-card"
+        (click)="viewRooms(hotel.hotelID)"
+        style="cursor: pointer"
+      >
+        <img
+          [src]="hotel.imageUrl"
+          class="card-img-top"
+          alt="{{ hotel.name }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ hotel.name }}</h5>
+          <p class="card-text">
+            <strong>Location:</strong> {{ hotel.location }}
+          </p>
+          <p class="card-text">
+            <strong>Rating:</strong>
+            <span class="text-warning">
+              <ng-container *ngFor="let star of [].constructor(hotel.rating)">
+                ★
+              </ng-container>
+            </span>
+          </p>
         </div>
       </div>
     </div>
   </div>
-  
-<!-- <div *ngFor="let hotel of hotels" class="hotel-card" (click)="viewRooms(hotel.hotelID)">
-    <img [src]="hotel.imageUrl" alt="{{ hotel.name }}" class="hotel-image">
-    <h3>{{ hotel.name }}</h3>
-    <p>Location: {{ hotel.location }}</p>
-    <p>Rating: {{ hotel.rating }}</p>
 </div> -->
-  
-
-
-<!-- 
-<div *ngIf="hotels$ | async as hotels; else loading">
-    <div *ngFor="let hotel of hotels; trackBy: trackByHotelID" class="hotel-card">
-      <h3>{{ hotel.name }}</h3>
-      <p><strong>Location:</strong> {{ hotel.location }}</p>
-      <p><strong>Rating:</strong> {{ hotel.rating }}</p>
-      <button (click)="viewRooms(hotel.hotelID)">View Rooms</button>
-    </div>
-  </div>
-  
-  <ng-template #loading>
-    <p>Loading hotels...</p>
-  </ng-template> 
--->

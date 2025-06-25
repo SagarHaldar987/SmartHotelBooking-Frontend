@@ -10,6 +10,7 @@ import { Home } from './components/core/home/home';
 import { HotelComponent } from './components/core/hotel/hotel';
 import { Profile } from './components/core/profile/profile';
 import { RoomComponent } from './components/core/room/room';
+import { AddHotel } from './components/manager/add-hotel/add-hotel';
 
 
 export const routes: Routes = [
@@ -22,5 +23,6 @@ export const routes: Routes = [
   {path: 'hotel', component: HotelComponent}, // Assuming authGuard is defined in your auth-guard file
   {path: 'rooms/:hotelID', component: RoomComponent }, // Lazy loading rooms module
   {path: 'profile', component: Profile},
+  {path:'add-hotel', component: AddHotel},
   { path: '**', redirectTo: '/home' },
 ];
