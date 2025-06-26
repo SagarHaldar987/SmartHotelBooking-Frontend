@@ -11,6 +11,7 @@ import { HotelComponent } from './components/core/hotel/hotel';
 import { Profile } from './components/core/profile/profile';
 import { RoomComponent } from './components/core/room/room';
 import { AddHotel } from './components/manager/add-hotel/add-hotel';
+import { PageNotFound } from './components/core/page-not-found/page-not-found';
 
 
 export const routes: Routes = [
@@ -24,5 +25,5 @@ export const routes: Routes = [
   {path: 'rooms/:hotelID', component: RoomComponent }, // Lazy loading rooms module
   {path: 'profile', component: Profile},
   {path:'add-hotel', component: AddHotel},
-  { path: '**', redirectTo: '/home' },
+  { path: '**', component: PageNotFound },
 ];
