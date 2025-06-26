@@ -1,0 +1,42 @@
+<!-- src/app/components/bookings/bookings.html -->
+<div class="container my-5" *ngIf="room">
+    <div class="card mx-auto" style="max-width: 600px">
+      <img
+        [src]="room.imageUrl"
+        class="card-img-top"
+        alt="{{ room.type }}"
+        style="height: 250px; object-fit: cover"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ room.type }}</h5>
+        <p class="card-text"><strong>Price:</strong> ₹{{ room.price }}</p>
+        <p class="card-text"><strong>Features:</strong> {{ room.features }}</p>
+        <button class="btn btn-primary" (click)="payNow()">Pay Now</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Optional loading indicator -->
+  <div *ngIf="!room" class="text-center my-5">
+    <p>Loading room details...</p>
+  </div>
+  
+
+
+
+<!-- <div class="container my-5">
+  <div class="card mx-auto" style="max-width: 600px">
+    <img
+      [src]="room.imageUrl"
+      class="card-img-top"
+      alt="{{ room.type }}"
+      style="height: 250px; object-fit: cover"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ room.type }}</h5>
+      <p class="card-text"><strong>Price:</strong> ₹{{ room.price }}</p>
+      <p class="card-text"><strong>Features:</strong> {{ room.features }}</p>
+      <button class="btn btn-primary" (click)="payNow()">Pay Now</button>
+    </div>
+  </div>
+</div> -->

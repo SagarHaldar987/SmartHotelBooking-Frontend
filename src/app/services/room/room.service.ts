@@ -11,8 +11,7 @@ export interface Room {
   price: number;
   availability: boolean;
   features: string;
-  // imageUrl: string;
-  imageUrl: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg'; // Optional property for image URL
+  imageUrl: string;
 }
 
 @Injectable({
@@ -26,9 +25,9 @@ export class RoomService {
     return this.http.get<Room[]>(`${environment.apiBaseUrl}/Rooms/hotel/${hotelID}`);
   }
 
-  // getRoomById(roomID: number): Observable<Room> {
-  //   return this.http.get<Room>(`${environment.apiBaseUrl}/Rooms/${roomID}`);
-  // } 
+  getRoomById(roomID: number): Observable<Room> {
+    return this.http.get<Room>(`${environment.apiBaseUrl}/Rooms/${roomID}`);
+  } 
 
   // addRoom(room: Room): Observable<Room> {
   //   return this.http.post<Room>(`${environment.apiBaseUrl}/Rooms`, room);

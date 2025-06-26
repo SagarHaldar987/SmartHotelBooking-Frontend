@@ -1,6 +1,6 @@
 // src/app/components/room/room.component.ts
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RoomService, Room } from '../../../services/room/room.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   hotelID!: number;
   private roomSub!: Subscription;
 
-  constructor(private route: ActivatedRoute, private roomService: RoomService, private cdr : ChangeDetectorRef) {}
+  constructor(private route: ActivatedRoute, private roomService: RoomService, private cdr : ChangeDetectorRef, private router : Router) {}
 
   ngOnInit(): void {
     this.hotelID = +this.route.snapshot.paramMap.get('hotelID')!;
@@ -38,34 +38,10 @@ export class RoomComponent implements OnInit, OnDestroy {
   trackByRoomId(index: number, room: Room): number {
     return room.roomID;
   }
+
+  
+bookRoom(roomID: number): void {
+    this.router.navigate(['/bookings', roomID]);
+  }
+  
 }
-
-
-
-
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-// import { RoomService, Room } from '../../../services/room/room.service';
-// import { CommonModule } from '@angular/common';
-
-// @Component({
-//   selector: 'app-room',
-//   templateUrl: './room.html',
-//   styleUrls: ['./room.css'],
-//   imports: [CommonModule]
-// })
-// export class RoomComponent implements OnInit {
-//   rooms: Room[] = [];
-//   hotelID!: number;
-
-//   constructor(private route: ActivatedRoute, private roomService: RoomService) {}
-
-//   ngOnInit(): void {
-//     this.hotelID = +this.route.snapshot.paramMap.get('hotelID')!;
-//     this.roomService.getRoomsByHotelId(this.hotelID).subscribe(data => {
-//       this.rooms = data;
-//       console.log('Rooms fetched successfully:', this.rooms);
-//     });
-//   }
-
-// }
