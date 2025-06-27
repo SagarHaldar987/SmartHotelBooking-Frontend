@@ -3,7 +3,7 @@
 import { Routes } from '@angular/router';
 import { Registration } from './components/registration/registration';
 import { Login } from './components/login/login';
-import { UserDashboard } from './components/user/user-dashboard/user-dashboard';
+import { MyBookings } from './components/user/my-bookings/my-bookings';
 import { ManagerDashboard } from './components/manager/manager-dashboard/manager-dashboard';
 // import { AuthGuard} from './auth-guard';
 import { Home } from './components/core/home/home';
@@ -13,6 +13,8 @@ import { RoomComponent } from './components/core/room/room';
 import { AddHotel } from './components/manager/add-hotel/add-hotel';
 import { PageNotFound } from './components/core/page-not-found/page-not-found';
 import { BookingsComponent } from './components/user/bookings/bookings';
+import { AddBookingDetails } from './components/user/bookings/add-booking-details/add-booking-details';
+import { Payment } from './components/user/payment/payment';
 
 
 export const routes: Routes = [
@@ -20,12 +22,14 @@ export const routes: Routes = [
   {path: 'home', component: Home },
   { path: 'register', component: Registration },
   { path: 'login', component: Login },
-  { path: 'user-dashboard', component: UserDashboard},
+  { path: 'my-bookings', component: MyBookings},
   { path: 'manager-dashboard', component: ManagerDashboard},
   {path: 'hotel', component: HotelComponent}, // Assuming authGuard is defined in your auth-guard file
   {path: 'rooms/:hotelID', component: RoomComponent }, // Lazy loading rooms module
   { path: 'bookings/:roomID', component: BookingsComponent },
   {path: 'profile', component: Profile},
   {path:'add-hotel', component: AddHotel},
+  {path:'add-booking-details', component: AddBookingDetails},
+  {path: 'payment', component: Payment},
   { path: '**', component: PageNotFound },
 ];

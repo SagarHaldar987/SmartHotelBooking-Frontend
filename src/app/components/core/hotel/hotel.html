@@ -1,4 +1,4 @@
-<!-- hotel.html -->
+<!-- src/app/components/core/hotel/hotel.html -->
 <div class="container my-4">
   <!-- Add Hotel Button (Visible only to Managers) -->
   <div class="text-end mb-3" *ngIf="userRole === 'Manager'">
@@ -8,18 +8,20 @@
   <div class="row">
     <ng-container *ngIf="hotels$ | async as hotels; else loading">
       <div *ngIf="hotels.length > 0; else noHotels">
-        <div *ngFor="let hotel of hotels" class="col-md-6 col-lg-4 mb-4">
-          <div class="card shadow-sm h-100 hotel-card" (click)="viewRooms(hotel.hotelID)" style="cursor: pointer;">
-            <img [src]="hotel.imageUrl" class="card-img-top" alt="{{ hotel.name }}" style="height: 200px; object-fit: cover;">
-            <div class="card-body">
-              <h5 class="card-title text-primary">{{ hotel.name }}</h5>
-              <p class="card-text"><strong>Location:</strong> {{ hotel.location }}</p>
-              <p class="card-text">
-                <strong>Rating:</strong>
-                <span class="text-warning">
-                  <ng-container *ngFor="let star of [].constructor(hotel.rating)">★</ng-container>
-                </span>
-              </p>
+        <div class="row">
+          <div *ngFor="let hotel of hotels" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <div class="card shadow-sm h-100 hotel-card" (click)="viewRooms(hotel.hotelID)" style="cursor: pointer;">
+              <img [src]="getImageUrl(hotel.imageUrl)" class="card-img-top" alt="{{ hotel.name }}" style="height: 200px; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title text-primary">{{ hotel.name }}</h5>
+                <p class="card-text"><strong>Location:</strong> {{ hotel.location }}</p>
+                <p class="card-text">
+                  <strong>Rating:</strong>
+                  <span class="text-warning">
+                    <ng-container *ngFor="let star of [].constructor(hotel.rating)">★</ng-container>
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
         </div>

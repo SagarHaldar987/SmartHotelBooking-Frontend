@@ -1,5 +1,4 @@
 <!-- src/app/components/core/room/room.html -->
-<!-- src/app/components/core/room/room.html -->
 <h2 class="text-center my-4">Rooms for Hotel ID: {{ hotelID }}</h2>
 
 <div class="container">
@@ -30,35 +29,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-<!-- <h2 class="text-center my-4">Rooms for Hotel ID: {{ hotelID }}</h2>
-
-<div class="container">
-  <div class="row">
-    <div *ngFor="let room of rooms; trackBy: trackByRoomId" class="col-md-6 col-lg-4 mb-4 room-card">
-      <div class="card shadow-sm h-100">
-        <img [src]="room.imageUrl" class="card-img-top mb-3" alt="{{ room.type }}" loading="lazy" style="height: 200px; object-fit: cover;">
-        <div class="card-body">
-          <h5 class="card-title text-primary">Type: {{ room.type }}</h5>
-          <p class="card-text"><strong>Price:</strong> ₹{{ room.price }}</p>
-          <p class="card-text">
-            <strong>Available:</strong>
-            <span class="badge" [ngClass]="room.availability ? 'bg-success' : 'bg-danger'">
-              {{ room.availability ? 'Yes' : 'No' }}
-            </span>
-          </p>
-          <p class="card-text"><strong>Features:</strong> {{ room.features }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
