@@ -18,7 +18,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   hotelID!: number;
   private roomSub!: Subscription;
 
-  constructor(private route: ActivatedRoute, private roomService: RoomService, private cdr : ChangeDetectorRef, private router : Router) {}
+  constructor(private route: ActivatedRoute, private roomService: RoomService, private cdr: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit(): void {
     this.hotelID = +this.route.snapshot.paramMap.get('hotelID')!;
@@ -39,9 +39,24 @@ export class RoomComponent implements OnInit, OnDestroy {
     return room.roomID;
   }
 
-  
-bookRoom(roomID: number): void {
-    this.router.navigate(['/bookings', roomID]);
+
+  bookRoom(roomID: number): void {
+    this.router.navigate(['/bookings', roomID]);
   }
-  
+
+  // Helper Method to add ROOM Image
+  getRoomImage(type: string): string {
+    switch (type.toLowerCase()) {
+      case 'single':
+        return '/assets/RoomsImage/SingleRoom.jpeg';
+      case 'double':
+        return '/assets/RoomsImage/DoubleRoom.jpg';
+      case 'family':
+        return '/assets/RoomsImage/FamilyRoom.jpeg';
+      case 'deluxe':
+        return '/assets/RoomsImage/DeluxeRoom.jpeg';
+      default:
+        return '/assets/RoomsImage/default.jpeg'; // Optional: Add a fallback image
+    }
+  }
 }

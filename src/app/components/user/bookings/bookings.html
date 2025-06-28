@@ -1,12 +1,14 @@
 <!-- src/app/components/user/bookings/bookings.html -->
 <div class="container my-5" *ngIf="room">
     <div class="card mx-auto" style="max-width: 600px">
-      <img
+      <!-- <img
         [src]="room.imageUrl"
         class="card-img-top"
         alt="{{ room.type }}"
         style="height: 250px; object-fit: cover"
-      />
+      /> -->
+      <img [src]="getRoomImage(room.type)" class="card-img-top mb-3" alt="{{ room.type }}" loading="lazy"
+                    style="height: 250px; object-fit: cover;">
       <div class="card-body">
         <h5 class="card-title">{{ room.type }}</h5>
         <p class="card-text"><strong>Price:</strong> ₹{{ room.price }}</p>

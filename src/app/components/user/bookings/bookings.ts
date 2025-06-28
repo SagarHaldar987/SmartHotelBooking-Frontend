@@ -39,4 +39,20 @@ export class BookingsComponent implements OnInit {
       },
     });
   }
+
+  // Helper Method to add ROOM Image
+  getRoomImage(type: string): string {
+    switch (type.toLowerCase()) {
+      case 'single':
+        return '/assets/RoomsImage/SingleRoom.jpeg';
+      case 'double':
+        return '/assets/RoomsImage/DoubleRoom.jpg';
+      case 'family':
+        return '/assets/RoomsImage/FamilyRoom.jpeg';
+      case 'deluxe':
+        return '/assets/RoomsImage/DeluxeRoom.jpeg';
+      default:
+        return '/assets/RoomsImage/default.jpeg'; // Optional: Add a fallback image
+    }
+  }
 }

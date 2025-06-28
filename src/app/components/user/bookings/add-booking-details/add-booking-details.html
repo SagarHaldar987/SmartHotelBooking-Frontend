@@ -1,18 +1,37 @@
 <!-- src/app/components/user/bookings/add-booking-details/add-booking-details.html -->
 <div class="container my-5">
-    <h3>Enter Booking Details</h3>
-    <form>
-      <div class="form-group">
-        <label>Check-In Date</label>
-        <input type="date" class="form-control" [(ngModel)]="checkInDate" name="checkInDate" required />
-      </div>
-      <div class="form-group">
-        <label>Check-Out Date</label>
-        <input type="date" class="form-control" [(ngModel)]="checkOutDate" name="checkOutDate" required />
-      </div>
-      <button type="button" class="btn btn-success mt-3" (click)="payNow()">
-        Pay Now ₹{{ price }}
-      </button>
-    </form>
-  </div>
+  <h3>Enter Booking Details</h3>
+  <form>
+    <div class="form-group">
+      <label>Check-In Date</label>
+      <input type="date"
+             class="form-control"
+             [(ngModel)]="checkInDate"
+             name="checkInDate"
+             [min]="today"
+             (change)="onCheckInChange()"
+             required />
+    </div>
+
+    <div class="form-group">
+      <label>Check-Out Date</label>
+      <input type="date"
+             class="form-control"
+             [(ngModel)]="checkOutDate"
+             name="checkOutDate"
+             [min]="minCheckOutDate"
+             required />
+    </div>
+
+    <button type="button" class="btn btn-success mt-3" (click)="payNow()">
+      Pay Now ₹{{ price }}
+    </button>
+  </form>
+</div>
+
+
+
+
+
+
   
