@@ -24,13 +24,3 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
-
-
-
-
-
-// import { CanActivateFn } from '@angular/router';
-
-// export const authGuard: CanActivateFn = (route, state) => {
-//   return true;
-// };

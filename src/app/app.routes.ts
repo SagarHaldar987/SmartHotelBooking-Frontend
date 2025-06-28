@@ -5,7 +5,8 @@ import { Registration } from './components/registration/registration';
 import { Login } from './components/login/login';
 import { MyBookings } from './components/user/my-bookings/my-bookings';
 import { ManagerDashboard } from './components/manager/manager-dashboard/manager-dashboard';
-// import { AuthGuard} from './auth-guard';
+import { AuthGuard } from './auth-guard';
+import { RoleGuard } from './role-guard';
 import { Home } from './components/core/home/home';
 import { HotelComponent } from './components/core/hotel/hotel';
 import { Profile } from './components/core/profile/profile';
@@ -19,17 +20,29 @@ import { Payment } from './components/user/payment/payment';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  {path: 'home', component: Home },
+  { path: 'home', component: Home },
   { path: 'register', component: Registration },
   { path: 'login', component: Login },
-  { path: 'my-bookings', component: MyBookings},
-  { path: 'manager-dashboard', component: ManagerDashboard},
-  {path: 'hotel', component: HotelComponent}, // Assuming authGuard is defined in your auth-guard file
-  {path: 'rooms/:hotelID', component: RoomComponent }, // Lazy loading rooms module
+  { path: 'my-bookings', component: MyBookings },
+  { path: 'manager-dashboard', component: ManagerDashboard },
+  { path: 'hotel', component: HotelComponent }, // Assuming authGuard is defined in your auth-guard file
+  { path: 'rooms/:hotelID', component: RoomComponent }, // Lazy loading rooms module
   { path: 'bookings/:roomID', component: BookingsComponent },
-  {path: 'profile', component: Profile},
-  {path:'add-hotel', component: AddHotel},
-  {path:'add-booking-details', component: AddBookingDetails},
-  {path: 'payment', component: Payment},
+  { path: 'profile', component: Profile },
+  { path: 'add-hotel', component: AddHotel },
+  { path: 'add-booking-details', component: AddBookingDetails },
+  { path: 'payment', component: Payment },
+  {
+    path: 'add-hotel',
+    component: AddHotel,
+    canActivate: [RoleGuard],
+    data: { expectedRole: 'Manager' }
+  },
   { path: '**', component: PageNotFound },
 ];
+
+
+
+
+
+

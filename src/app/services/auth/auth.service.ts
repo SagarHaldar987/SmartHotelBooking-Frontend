@@ -62,10 +62,20 @@ export class AuthService {
     this.role.next(data.role);
   }
 
+
   // Get role from cookie
   getRole(): string | null {
     return this.cookieService.get('role');
   }
+
+
+  // Get UserId from Cookie
+  getUserId(): number {
+    const userId = this.cookieService.get('userId');
+    console.log("Fetched userId from cookie:", userId); // ✅ Debug
+    return userId ? +userId : 0;
+  }
+
 
   // Check login status
   isLoggedIn(): boolean {

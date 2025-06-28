@@ -18,14 +18,18 @@ export interface Hotel {
   providedIn: 'root',
 })
 export class HotelService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Method to get all hotels
   getAllHotels(): Observable<Hotel[]> {
     return this.http.get<Hotel[]>(`${environment.apiBaseUrl}/Hotels`, { withCredentials: true });
   }
-  
-  // getAllHotels(): Observable<Hotel[]> {
-  //     return this.http.get<Hotel[]>(`${environment.apiBaseUrl}/Hotels`,{withCredentials: true});
-  // }
+
+  // Method to add Hotel by Manager Only
+  addHotel(formData: FormData, managerID: number): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}/Hotels/manager/${managerID}`, formData, {
+      withCredentials: true,
+    });
+  }
+
 }

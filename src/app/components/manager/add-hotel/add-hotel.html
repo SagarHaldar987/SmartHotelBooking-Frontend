@@ -1,1 +1,39 @@
-<p>add-hotel works!</p>
+<!-- src/app/components/manager/add-hotel/add-hotel.html -->
+
+<div class="container my-5">
+  <div class="card shadow-lg p-4">
+    <h3 class="text-center mb-4 text-primary">Add a New Hotel</h3>
+    <form (ngSubmit)="submitHotel()" enctype="multipart/form-data">
+      <div class="row">
+        <div class="form-group col-md-6 mb-3">
+          <label for="name">Hotel Name</label>
+          <input type="text" id="name" class="form-control" [(ngModel)]="name" name="name" required />
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+          <label for="location">Location</label>
+          <input type="text" id="location" class="form-control" [(ngModel)]="location" name="location" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6 mb-3">
+          <label for="amenities">Amenities</label>
+          <input type="text" id="amenities" class="form-control" [(ngModel)]="amenities" name="amenities" required />
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+          <label for="rating">Rating (0-5)</label>
+          <input type="number" step="0.1" max="5" min="0" id="rating" class="form-control" [(ngModel)]="rating" name="rating" required />
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="image">Upload Hotel Image</label>
+        <input type="file" id="image" class="form-control" (change)="onFileChange($event)" accept="image/*" required />
+      </div>
+
+      <button type="submit" class="btn btn-success w-100 mt-2">Add Hotel</button>
+    </form>
+  </div>
+</div>
