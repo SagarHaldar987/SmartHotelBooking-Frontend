@@ -7,11 +7,21 @@ import { environment } from '../../../environments/environment';
 export interface Room {
   roomID: number;
   hotelID: number;
+  managerID: number;
   type: string;
   price: number;
   availability: boolean;
   features: string;
-  imageUrl: string;
+  imageUrl?: string;
+}
+
+export interface CreateRoom {
+  hotelID: number;
+  managerID: number;
+  type: string;
+  price: number;
+  availability: boolean;
+  features: string;
 }
 
 @Injectable({
@@ -29,9 +39,9 @@ export class RoomService {
     return this.http.get<Room>(`${environment.apiBaseUrl}/Rooms/${roomID}`);
   } 
 
-  // addRoom(room: Room): Observable<Room> {
-  //   return this.http.post<Room>(`${environment.apiBaseUrl}/Rooms`, room);
-  // }
+  addRoom(room: CreateRoom): Observable<Room> {
+    return this.http.post<Room>(`${environment.apiBaseUrl}/Rooms`, room);
+  }
 
   // updateRoom(room: Room): Observable<Room> {
   //   return this.http.put<Room>(`${environment.apiBaseUrl}/Rooms/${room.roomID}`, room);

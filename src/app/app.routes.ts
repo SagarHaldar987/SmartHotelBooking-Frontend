@@ -16,6 +16,7 @@ import { PageNotFound } from './components/core/page-not-found/page-not-found';
 import { BookingsComponent } from './components/user/bookings/bookings';
 import { AddBookingDetails } from './components/user/bookings/add-booking-details/add-booking-details';
 import { Payment } from './components/user/payment/payment';
+import { AddRoomComponent } from './components/manager/add-room/add-room';
 
 
 export const routes: Routes = [
@@ -29,7 +30,6 @@ export const routes: Routes = [
   { path: 'rooms/:hotelID', component: RoomComponent }, // Lazy loading rooms module
   { path: 'bookings/:roomID', component: BookingsComponent },
   { path: 'profile', component: Profile },
-  { path: 'add-hotel', component: AddHotel },
   { path: 'add-booking-details', component: AddBookingDetails },
   { path: 'payment', component: Payment },
   {
@@ -38,6 +38,7 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { expectedRole: 'Manager' }
   },
+  { path: 'add-room', component: AddRoomComponent, canActivate: [RoleGuard], data: { expectedRole: 'Manager' } },
   { path: '**', component: PageNotFound },
 ];
 
