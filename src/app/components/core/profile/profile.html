@@ -1,12 +1,19 @@
-<div class="profile-container" *ngIf="isLoggedIn">
-  <h2>User Profile</h2>
-  <p><strong>Name:</strong> {{ name }}</p>
-  <p><strong>Email:</strong> {{ email }}</p>
-  <p><strong>Role:</strong> {{ role }}</p>
+<div class="container mt-5" *ngIf="isLoggedIn">
+  <div class="card profile-card shadow rounded-4 mx-auto">
+    <div class="card-body text-center">
+      
+      <!-- 👤 Profile Image/Icon -->
+      <div class="profile-image mx-auto mb-3">
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" class="img-fluid rounded-circle" />
+      </div>
 
-  <!-- <button (click)="logout()" class="logout-button">Logout</button> -->
+      <h3 class="mb-3">{{ name }}</h3>
+      <p><strong>Email:</strong> {{ email }}</p>
+      <p><strong>Role:</strong> {{ role }}</p>
+    </div>
+  </div>
 </div>
 
-<div *ngIf="!isLoggedIn">
-  <p>You are not logged in.</p>
+<div class="text-center mt-5" *ngIf="!isLoggedIn">
+  <h5 class="text-danger">⚠️ You are not logged in.</h5>
 </div>

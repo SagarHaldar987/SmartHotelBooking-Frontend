@@ -1,55 +1,62 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-  <a class="navbar-brand fw-bold" routerLink="/home">Smart-Hotels</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top px-4 py-2">
+  <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/home">
+    <i class="fas fa-hotel"></i>
+    <span class="fs-5">Smart-Hotels</span>
+  </a>
+
   <button
-    class="navbar-toggler"
+    class="navbar-toggler border-0"
     type="button"
     data-bs-toggle="collapse"
     data-bs-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
   >
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item"><a class="nav-link" routerLink="/home">Home</a></li>
-      <!-- <li class="nav-item"><a class="nav-link" (click)="goToHotels()">Hotels</a></li> -->
+    <ul class="navbar-nav gap-2">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">🏠 Home</a>
+      </li>
 
-      <!-- If No One is Logged In  -->
+      <!-- 🔓 Not Logged In -->
       <ng-container *ngIf="!isLoggedIn">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" routerLink="/login" routerLinkActive="active">🔑 Login/Register</a>
         </li>
       </ng-container>
 
-      <!-- If User is Logged In -->
+      <!-- 👤 User Logged In -->
       <ng-container *ngIf="isLoggedIn && role === 'User'">
         <li class="nav-item">
-          <a class="nav-link" (click)="goToHotels()">Hotels</a>
+          <a class="nav-link" (click)="goToHotels()">🏨 Hotels</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/my-bookings">MyBookings</a>
+          <a class="nav-link" routerLink="/my-bookings" routerLinkActive="active">📖 MyBookings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/profile">Profile</a>
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active">👤 Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" (click)="logout()">Logout</a>
+          <a class="nav-link text-danger" (click)="logout()">🚪 Logout</a>
         </li>
       </ng-container>
 
-      <!-- If Manager is Logged In -->
+      <!-- 🧑‍💼 Manager Logged In -->
       <ng-container *ngIf="isLoggedIn && role === 'Manager'">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/manager-dashboard">Dashboard</a>
+          <a class="nav-link" routerLink="/manager-dashboard" routerLinkActive="active">📊 Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/profile">Profile</a>
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active">👤 Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" (click)="logout()">Logout</a>
+          <a class="nav-link text-danger" (click)="logout()">🚪 Logout</a>
         </li>
       </ng-container>
-
     </ul>
   </div>
 </nav>

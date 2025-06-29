@@ -1,13 +1,22 @@
-/* .nav-link {
-    transition: color 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    color: yellow !important;
-  }
-  
-  .nav-link.active,
-  .nav-link:active {
-    color: orange !important;
-  }
-   */
+.navbar {
+  transition: all 0.3s ease-in-out;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.nav-link {
+  transition: color 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #0dcaf0 !important; /* Bootstrap Info color */
+}
+
+.navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
