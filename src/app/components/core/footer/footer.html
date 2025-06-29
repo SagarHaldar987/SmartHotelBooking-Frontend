@@ -1,41 +1,45 @@
-<footer class="bg-dark text-white py-4 mt-5">
+<footer class="footer mt-auto bg-dark text-white py-4">
   <div class="container">
     <div class="row text-center text-md-start">
+      <!-- About Section -->
       <div class="col-md-4 mb-3">
-        <h5 class="fw-bold">Smart-Hotels</h5>
-        <p>Experience luxury and comfort at your fingertips.</p>
+        <h5 class="fw-bold">🏨 Smart-Hotels</h5>
+        <p class="small">
+          Experience luxury and comfort at your fingertips. Book premium rooms at the best prices across India.
+        </p>
       </div>
 
+      <!-- Quick Links -->
       <div class="col-md-4 mb-3">
-        <h6 class="fw-bold">Quick Links</h6>
+        <h6 class="fw-bold">🔗 Quick Links</h6>
         <ul class="list-unstyled">
-          <li>
-            <a routerLink="/home" class="text-white text-decoration-none"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a routerLink="/hotels" class="text-white text-decoration-none"
-              >Hotels</a
-            >
-          </li>
-          <li>
-            <a routerLink="/contact" class="text-white text-decoration-none"
-              >Contact Us</a
-            >
-          </li>
+          <li><a routerLink="/home" class="text-white text-decoration-none">🏠 Home</a></li>
+          <li><a routerLink="/hotels" class="text-white text-decoration-none">🏢 Hotels</a></li>
+          <li><a routerLink="/contact" class="text-white text-decoration-none">📞 Contact Us</a></li>
+          <li><a routerLink="/about" class="text-white text-decoration-none">ℹ️ About</a></li>
         </ul>
       </div>
 
+      <!-- Contact & Socials -->
       <div class="col-md-4 mb-3">
-        <h6 class="fw-bold">Popular Cities</h6>
-        <ul class="list-unstyled">
-          <li>Delhi</li>
-          <li>Mumbai</li>
-          <li>Kolkata</li>
-          <li>Chennai</li>
-        </ul>
+        <h6 class="fw-bold">📍 Reach Us</h6>
+        <!-- <p class="mb-1"><i class="fa fa-envelope"></i> support@smarthotels.com</p> -->
+         <p class="mb-1"><i class="fa fa-envelope"></i> support&#64;smarthotels.com</p>
+        <p class="mb-1"><i class="fa fa-phone"></i> +91 9876543210</p>
+
+        <h6 class="fw-bold mt-3">🌐 Follow Us</h6>
+        <div class="d-flex gap-3 justify-content-center justify-content-md-start">
+          <a href="#" class="text-white"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+        </div>
       </div>
+    </div>
+
+    <hr class="border-light" />
+    <div class="text-center small">
+      © {{ currentYear }} Smart-Hotels. All rights reserved.
     </div>
   </div>
 </footer>

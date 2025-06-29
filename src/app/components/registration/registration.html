@@ -1,6 +1,56 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
+      <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4">📝 Register</h2>
+          <form (ngSubmit)="onSubmit()">
+
+            <div class="mb-3">
+              <label for="name" class="form-label">👤 Name</label>
+              <input type="text" [(ngModel)]="user.name" name="name" id="name" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">📧 Email</label>
+              <input type="email" [(ngModel)]="user.email" name="email" id="email" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">🔒 Password</label>
+              <input type="password" [(ngModel)]="user.password" name="password" id="password" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="contactNumber" class="form-label">📱 Contact Number</label>
+              <input type="text" [(ngModel)]="user.contactNumber" name="contactNumber" id="contactNumber" class="form-control" />
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary rounded-pill">✅ Register</button>
+            </div>
+          </form>
+
+          <hr class="my-4" />
+          <p class="text-center">
+            Already have an account?
+            <a routerLink="/login" class="text-decoration-none">🔑 Log In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- <div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
 
       <div class="card shadow-lg rounded-4 border-0">
         <div class="card-body p-4">
@@ -25,7 +75,6 @@
               <label for="role" class="form-label">👥 Role</label>
               <select [(ngModel)]="user.role" name="role" id="role" class="form-select">
                 <option value="User">User</option>
-                <!-- <option value="Admin">Admin</option> -->
               </select>
             </div>
 
@@ -51,4 +100,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

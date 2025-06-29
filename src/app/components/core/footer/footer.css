@@ -1,0 +1,15 @@
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+a.text-white:hover {
+  color: #0dcaf0; /* Bootstrap Info Blue */
+  transition: 0.2s ease-in;
+}
+
+.footer i {
+  cursor: pointer;
+}
