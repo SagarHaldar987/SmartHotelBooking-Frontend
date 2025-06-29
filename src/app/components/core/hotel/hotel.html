@@ -16,7 +16,6 @@
                     <ng-container *ngFor="let star of [].constructor(hotel.rating)">★</ng-container>
                   </span>
                 </p>
-                <button *ngIf="userRole === 'Manager'" class="btn btn-sm btn-outline-success" (click)="addRoom(hotel.hotelID); $event.stopPropagation()">Add Room</button>
               </div>
             </div>
           </div>

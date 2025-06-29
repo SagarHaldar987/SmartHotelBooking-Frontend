@@ -45,7 +45,7 @@ export class Payment implements OnInit {
       userID: this.userID,
       bookingID: this.bookingID,
       amount: this.amount,
-      status: 'Booked',
+      // status: true,
       paymentMethod: this.paymentMethod
     };
 

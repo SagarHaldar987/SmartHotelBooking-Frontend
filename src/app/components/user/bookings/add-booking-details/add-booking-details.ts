@@ -23,7 +23,7 @@ export class AddBookingDetails implements OnInit {
     private route: ActivatedRoute,
     private bookingService: BookingService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -53,24 +53,45 @@ export class AddBookingDetails implements OnInit {
   }
 
   payNow(): void {
+    // ✅ 1. Validation check before making API call
+    if (!this.checkInDate || !this.checkOutDate) {
+      alert('Please select both check-in and check-out dates.');
+      return; // stop further execution
+    }
+
+    // ✅ 2. Prepare the booking object
     const booking: Booking = {
       roomID: this.roomID,
-      checkInDate: this.checkInDate,
-      checkOutDate: this.checkOutDate,
-      status: "Confirmed"
+      // checkInDate: this.checkInDate,
+      // checkOutDate: this.checkOutDate,
+      checkInDate: new Date(this.checkInDate).toISOString(),      // "2025-07-01T00:00:00.000Z"
+      checkOutDate: new Date(this.checkOutDate).toISOString(),     // "2025-07-02T00:00:00.000Z"
+      status: true // ✅ Must be boolean (NOT "Confirmed")
     };
 
-    this.bookingService.createBooking(booking).subscribe(response => {
-      console.log('Booking Response:', response);
-      this.router.navigate(['/payment'], {
-        queryParams: {
-          hotelId: response.hotelId,
-          userId: response.userId,
-          bookingId: response.bookingId,
-          amount: this.price,
-          status: response.status,
-        }
-      });
+    console.log('Sending booking payload:', booking);
+
+    // ✅ 3. Call the API
+    this.bookingService.createBooking(booking).subscribe({
+      next: (response) => {
+        console.log('✅ Booking Response:', response);
+
+        // ✅ 4. Navigate to Payment component with queryParams
+        this.router.navigate(['/payment'], {
+          queryParams: {
+            hotelId: response.hotelID,
+            userId: response.userID,
+            bookingId: response.bookingID,
+            amount: this.price
+          }
+        });
+      },
+
+      // ✅ 5. Handle errors gracefully
+      error: (err) => {
+        console.error('❌ Booking API Error:', err);
+        alert('Booking failed. Please try again.');
+      }
     });
   }
 }

@@ -34,8 +34,8 @@ export class HotelService {
 
   // Method to get all hotels created by the LoggedIn Manager Only.
   getHotelsByManagerId(managerID: number): Observable<Hotel[]> {
-  return this.http.get<Hotel[]>(`${environment.apiBaseUrl}/Hotels/manager/${managerID}`, {
-    withCredentials: true,
-  });
-}
+    return this.http.get<Hotel[]>(`${environment.apiBaseUrl}/Hotels/manager/${managerID}`, {
+      withCredentials: true,
+    });
+  }
 }
