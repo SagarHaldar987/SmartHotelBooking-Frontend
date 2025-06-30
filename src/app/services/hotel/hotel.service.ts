@@ -57,5 +57,12 @@ export class HotelService {
       }
     );
   }
-  
+
+  // Method to get a Hotel by it's ID.
+  getHotelById(hotelID: number): Observable<Hotel> {
+    return this.http.get<Hotel>(`${environment.apiBaseUrl}/Hotels/${hotelID}`, {
+      withCredentials: true
+    });
+  }
+
 }

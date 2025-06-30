@@ -76,6 +76,10 @@ export class AuthService {
     return userId ? +userId : 0;
   }
 
+  // Get UserName from Cookie
+  getName(): string {
+    return this.cookieService.get('name') || 'User';
+  }
 
   // Check login status
   isLoggedIn(): boolean {

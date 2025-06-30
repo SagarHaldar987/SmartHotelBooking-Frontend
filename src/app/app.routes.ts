@@ -18,6 +18,7 @@ import { AddBookingDetails } from './components/user/bookings/add-booking-detail
 import { Payment } from './components/user/payment/payment';
 import { AddRoomComponent } from './components/manager/add-room/add-room';
 import { UpdateHotel } from './components/manager/update-hotel/update-hotel';
+import { Reviews } from './components/core/review/review';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -32,6 +33,7 @@ export const routes: Routes = [
   { path: 'bookings/:roomID', component: BookingsComponent },
   { path: 'add-booking-details', component: AddBookingDetails },
   { path: 'payment', component: Payment },
+  { path: 'hotel-reviews/:hotelID', component: Reviews },
   {
     path: 'add-hotel',
     component: AddHotel,

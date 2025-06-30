@@ -68,4 +68,9 @@ export class HotelComponent implements OnInit {
       }
     });
   }
+
+  viewReviews(hotelID: number): void {
+    this.router.navigate(['/hotel-reviews', hotelID]);
+  }
+
 }
