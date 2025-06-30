@@ -1,5 +1,5 @@
 // src/app/components/hotel-reviews/reviews.ts
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HotelService, Hotel } from '../../../services/hotel/hotel.service';
 import { ReviewService, Review } from '../../../services/review/review.services';
@@ -27,7 +27,8 @@ export class Reviews implements OnInit {
     private route: ActivatedRoute,
     private hotelService: HotelService,
     private reviewService: ReviewService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef 
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +40,8 @@ export class Reviews implements OnInit {
         this.hotel = data;
 
         console.log('Hotel info fetched:', this.hotel); // ✅ Console
+
+        this.cdr.detectChanges(); 
       },
       error: (err) => console.error('Hotel fetch error', err)
     });
