@@ -24,12 +24,12 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   { path: 'register', component: Registration },
   { path: 'login', component: Login },
-  { path: 'my-bookings', component: MyBookings },
-  { path: 'manager-dashboard', component: ManagerDashboard },
-  { path: 'hotel', component: HotelComponent }, // Assuming authGuard is defined in your auth-guard file
-  { path: 'rooms/:hotelID', component: RoomComponent }, // Lazy loading rooms module
-  { path: 'bookings/:roomID', component: BookingsComponent },
   { path: 'profile', component: Profile },
+  { path: 'my-bookings', component: MyBookings, canActivate: [RoleGuard], data: { expectedRole: 'User' } },
+  { path: 'manager-dashboard', component: ManagerDashboard, canActivate: [RoleGuard], data: { expectedRole: 'Manager' } },
+  { path: 'hotel', component: HotelComponent },
+  { path: 'rooms/:hotelID', component: RoomComponent },
+  { path: 'bookings/:roomID', component: BookingsComponent },
   { path: 'add-booking-details', component: AddBookingDetails },
   { path: 'payment', component: Payment },
   {

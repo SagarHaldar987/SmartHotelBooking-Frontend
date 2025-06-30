@@ -11,24 +11,64 @@
     <ng-container *ngIf="hotels$ | async as hotels; else loading">
       <div *ngIf="hotels.length > 0; else noHotels">
         <div class="row">
-          <div *ngFor="let hotel of hotels" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="card shadow-sm h-100 hotel-card" style="cursor: pointer;">
-              <img [src]="getImageUrl(hotel.imageUrl)" class="card-img-top" alt="{{ hotel.name }}" style="height: 200px; object-fit: cover;">
+          <div
+            *ngFor="let hotel of hotels"
+            class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+          >
+            <div
+              class="card shadow-sm h-100 hotel-card"
+              style="cursor: pointer"
+            >
+              <img
+                [src]="getImageUrl(hotel.imageUrl)"
+                class="card-img-top"
+                alt="{{ hotel.name }}"
+                style="height: 200px; object-fit: cover"
+              />
               <div class="card-body">
                 <h5 class="card-title text-primary">{{ hotel.name }}</h5>
-                <p class="card-text"><strong>Location:</strong> {{ hotel.location }}</p>
+                <p class="card-text">
+                  <strong>Location:</strong> {{ hotel.location }}
+                </p>
                 <p class="card-text">
                   <strong>Rating:</strong>
                   <span class="text-warning">
-                    <ng-container *ngFor="let star of [].constructor(hotel.rating)">★</ng-container>
+                    <ng-container
+                      *ngFor="let star of [].constructor(hotel.rating)"
+                      >★</ng-container
+                    >
                   </span>
                 </p>
-                <button *ngIf="userRole === 'Manager'" class="btn btn-sm btn-outline-success" (click)="addRoom(hotel.hotelID); $event.stopPropagation()">Add Room</button>
+                <button
+                  *ngIf="userRole === 'Manager'"
+                  class="btn btn-sm btn-outline-success me-2"
+                  (click)="addRoom(hotel.hotelID); $event.stopPropagation()"
+                >
+                  Add Room
+                </button>
+                
+                <button
+                  *ngIf="userRole === 'Manager'"
+                  class="btn btn-sm btn-outline-danger me-2"
+                  (click)="$event.stopPropagation()"
+                >
+                  Delete 
+                </button>
+
+                <button
+                  *ngIf="userRole === 'Manager'"
+                  class="btn btn-sm btn-outline-primary me-2"
+                  (click)="$event.stopPropagation()"
+                >
+                   Update
+                </button>
+
               </div>
             </div>
           </div>
         </div>
       </div>
+
     </ng-container>
 
     <ng-template #loading><p>Loading hotels...</p></ng-template>
