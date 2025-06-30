@@ -1,5 +1,5 @@
 // src/app/components/manager/manager-dashboard/manager-dashboard.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HotelService, Hotel } from '../../../services/hotel/hotel.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Observable, of } from 'rxjs';
@@ -11,6 +11,7 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './manager-dashboard.html',
+  
 })
 export class ManagerDashboard implements OnInit {
   hotels$: Observable<Hotel[]> = of([]);
@@ -20,7 +21,8 @@ export class ManagerDashboard implements OnInit {
   constructor(
     private hotelService: HotelService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef // ChangeDetectorRef to trigger change detection manually
   ) {}
 
   hotels: Hotel[] = []; // Local array to store hotels
@@ -70,9 +72,8 @@ export class ManagerDashboard implements OnInit {
     this.hotelService.deleteHotel(hotelID, managerID).subscribe({
       next: () => {
         console.log('Hotel deleted successfully');
-        // Refresh the list of hotels after deletion
-        // this.hotels$ = this.hotelService.getHotelsByManagerId(managerID);
         this.hotels = this.hotels.filter((hotel) => hotel.hotelID !== hotelID);
+        this.cdr.markForCheck(); // Manually trigger change detection
       },
       error: (error) => {
         console.error('Error deleting hotel:', error);

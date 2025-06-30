@@ -1,33 +1,63 @@
 <div class="container mt-5">
-    <div class="card shadow-lg">
-      <div class="card-header bg-primary text-white">
-        <h4 class="mb-0">Update Hotel Details</h4>
-      </div>
-      <div class="card-body">
-        <form (ngSubmit)="onSubmit()" #hotelForm="ngForm">
-          <div class="mb-3">
-            <label for="name" class="form-label">Hotel Name</label>
-            <input type="text" id="name" class="form-control" [(ngModel)]="hotel.name" name="name" required />
-          </div>
-  
-          <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input type="text" id="location" class="form-control" [(ngModel)]="hotel.location" name="location" required />
-          </div>
-  
-          <div class="mb-3">
-            <label for="amenities" class="form-label">Amenities</label>
-            <input type="text" id="amenities" class="form-control" [(ngModel)]="hotel.amenities" name="amenities" placeholder="e.g., AC, GYM, WIFI" />
-          </div>
-  
-          <div class="mb-3">
-            <label for="rating" class="form-label">Rating</label>
-            <input type="number" id="rating" class="form-control" [(ngModel)]="hotel.rating" name="rating" min="1" max="5" />
-          </div>
-  
-          <button type="submit" class="btn btn-success w-100">Update Hotel</button>
-        </form>
-      </div>
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Update Hotel Details</h4>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #hotelForm="ngForm">
+        <div class="mb-3">
+          <label for="name" class="form-label">Hotel Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            [(ngModel)]="hotel.name"
+            name="name"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            id="location"
+            class="form-control"
+            [(ngModel)]="hotel.location"
+            name="location"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="amenities" class="form-label">Amenities</label>
+          <input
+            type="text"
+            id="amenities"
+            class="form-control"
+            [(ngModel)]="hotel.amenities"
+            name="amenities"
+            placeholder="e.g., AC, GYM, WIFI"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="rating" class="form-label">Rating</label>
+          <input
+            type="number"
+            id="rating"
+            class="form-control"
+            [(ngModel)]="hotel.rating"
+            name="rating"
+            min="1"
+            max="5"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">
+          Update Hotel
+        </button>
+      </form>
     </div>
   </div>
-  
+</div>
