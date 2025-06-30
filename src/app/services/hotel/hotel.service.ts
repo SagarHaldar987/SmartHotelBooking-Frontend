@@ -38,4 +38,24 @@ export class HotelService {
       withCredentials: true,
     });
   }
+
+  // Method to delete a hotel by ID and Manager ID
+  deleteHotel(hotelID: number, managerID: number): Observable<any> {
+    return this.http.delete(`${environment.apiBaseUrl}/Hotels/${hotelID}/manager/${managerID}`, {
+      withCredentials: true,
+    });
+  }
+
+  // Method to update a hotel by ID and Manager ID
+  updateHotel(hotelID: number, managerID: number, hotelData: any): Observable<any> {
+    return this.http.put(
+      `${environment.apiBaseUrl}/Hotels/${hotelID}/manager/${managerID}`,
+      hotelData,
+      {
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+  }
+  
 }

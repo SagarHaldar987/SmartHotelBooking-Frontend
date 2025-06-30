@@ -17,7 +17,7 @@ import { BookingsComponent } from './components/user/bookings/bookings';
 import { AddBookingDetails } from './components/user/bookings/add-booking-details/add-booking-details';
 import { Payment } from './components/user/payment/payment';
 import { AddRoomComponent } from './components/manager/add-room/add-room';
-
+import { UpdateHotel } from './components/manager/update-hotel/update-hotel';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -39,11 +39,6 @@ export const routes: Routes = [
     data: { expectedRole: 'Manager' }
   },
   { path: 'add-room', component: AddRoomComponent, canActivate: [RoleGuard], data: { expectedRole: 'Manager' } },
+  { path: 'update-hotel', component: UpdateHotel},
   { path: '**', component: PageNotFound },
 ];
-
-
-
-
-
-

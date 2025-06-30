@@ -50,7 +50,7 @@
                 <button
                   *ngIf="userRole === 'Manager'"
                   class="btn btn-sm btn-outline-danger me-2"
-                  (click)="$event.stopPropagation()"
+                  (click)="deleteHotel(hotel.hotelID);  $event.stopPropagation()"
                 >
                   Delete 
                 </button>
@@ -58,7 +58,7 @@
                 <button
                   *ngIf="userRole === 'Manager'"
                   class="btn btn-sm btn-outline-primary me-2"
-                  (click)="$event.stopPropagation()"
+                  (click)="updateHotel(hotel.hotelID); $event.stopPropagation()"
                 >
                    Update
                 </button>
