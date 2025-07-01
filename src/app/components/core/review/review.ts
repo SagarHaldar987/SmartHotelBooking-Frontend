@@ -1,5 +1,5 @@
 // src/app/components/hotel-reviews/reviews.ts
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HotelService, Hotel } from '../../../services/hotel/hotel.service';
 import { ReviewService, Review } from '../../../services/review/review.services';
@@ -12,6 +12,7 @@ import { environment } from '../../../../environments/environment';
   selector: 'app-reviews',
   templateUrl: './review.html',
   styleUrls: ['./review.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush, // ✅ Use ChangeDetectionStrategy.OnPush for better performance
   standalone: true,
   imports: [FormsModule, CommonModule],
 })
@@ -28,7 +29,7 @@ export class Reviews implements OnInit {
     private hotelService: HotelService,
     private reviewService: ReviewService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef 
+    private cdr: ChangeDetectorRef // ✅ Inject ChangeDetectorRef for manual change detection
   ) { }
 
   ngOnInit(): void {
@@ -74,9 +75,5 @@ export class Reviews implements OnInit {
 
   getUserName(): string {
     return this.authService.getName(); // 👈 Add this in auth.service.ts
-  }
-
-  getImageUrl(path: string): string {
-    return `http://localhost:5281${path}`;
   }
 }

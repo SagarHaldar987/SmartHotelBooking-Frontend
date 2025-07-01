@@ -4,7 +4,8 @@
     <!-- 🔹 Hotel Details Card -->
     <div class="card shadow mb-4">
       <img
-        [src]="getImageUrl(hotel.imageUrl)"
+        [src]="hotel.imageUrl"
+        alt="{{ hotel.name }} Image"
         class="card-img-top"
         style="height: 300px; object-fit: cover"
       />
@@ -14,7 +15,7 @@
         <p><strong>Amenities:</strong> {{ hotel.amenities }}</p>
         <p>
           <strong>Rating:</strong>
-          <span class="text-warning">
+          <span class="text-warning"> 
             <ng-container *ngFor="let star of [].constructor(hotel.rating)"
               >★</ng-container
             >

@@ -1,9 +1,17 @@
 // src/app/components/room/room.component.ts
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoomService, Room } from '../../../services/room/room.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { HotelService, Hotel } from '../../../services/hotel/hotel.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-room',
@@ -11,22 +19,43 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./room.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class RoomComponent implements OnInit, OnDestroy {
   rooms: Room[] = [];
+  hotelName: string = ''; // Added : To store hotel name
   hotelID!: number;
   private roomSub!: Subscription;
 
-  constructor(private route: ActivatedRoute, private roomService: RoomService, private cdr: ChangeDetectorRef, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private roomService: RoomService,
+    private hotelService: HotelService, // ✅ Add this
+    private cdr: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.hotelID = +this.route.snapshot.paramMap.get('hotelID')!;
-    this.roomSub = this.roomService.getRoomsByHotelId(this.hotelID).subscribe(data => {
-      this.rooms = data;
-      console.log('Rooms fetched successfully:', this.rooms);
-      this.cdr.markForCheck(); // Ensure change detection runs
+
+    // ✅ Fetch hotel name
+    this.hotelService.getHotelById(this.hotelID).subscribe({
+      next: (hotel) => {
+        this.hotelName = hotel.name;
+        this.cdr.markForCheck();
+      },
+      error: (err) => console.error('Hotel fetch error:', err),
     });
+    console.log('Room Component, Hotel ID:', this.hotelID); // Debugging log
+
+    // Fetch rooms by hotel ID
+    this.roomSub = this.roomService
+      .getRoomsByHotelId(this.hotelID)
+      .subscribe((data) => {
+        this.rooms = data;
+        console.log('Rooms fetched successfully:', this.rooms);
+        this.cdr.markForCheck(); // Ensure change detection runs
+      });
   }
 
   ngOnDestroy(): void {
@@ -38,7 +67,6 @@ export class RoomComponent implements OnInit, OnDestroy {
   trackByRoomId(index: number, room: Room): number {
     return room.roomID;
   }
-
 
   bookRoom(roomID: number): void {
     this.router.navigate(['/bookings', roomID]);
