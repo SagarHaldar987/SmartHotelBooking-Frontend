@@ -39,18 +39,24 @@ export class Reviews implements OnInit {
       next: (data) => {
         data.imageUrl = `${environment.apiBaseUrl}${data.imageUrl}`; // ✅ Prefix URL
         this.hotel = data;
-
         console.log('Hotel info fetched:', this.hotel); // ✅ Console
-
         this.cdr.detectChanges(); 
       },
       error: (err) => console.error('Hotel fetch error', err)
     });
 
+    // this.reviewService.getReviewsByHotelId(this.hotelID).subscribe({
+    //   next: (data) => (this.reviews = data),
+    //   error: (err) => console.error('Review fetch error', err)
+    // });
     this.reviewService.getReviewsByHotelId(this.hotelID).subscribe({
-      next: (data) => (this.reviews = data),
+      next: (data) => {
+        this.reviews = data;
+        console.log('Reviews fetched:', this.reviews); // ✅ Add this line
+      },
       error: (err) => console.error('Review fetch error', err)
     });
+    this.cdr.detectChanges(); // ✅ Trigger change detection manually    
   }
 
   addReview(): void {
@@ -71,6 +77,7 @@ export class Reviews implements OnInit {
       },
       error: (err) => console.error('Add review error', err)
     });
+    this.cdr.detectChanges(); // ✅ Trigger change detection manually
   }
 
   getUserName(): string {
