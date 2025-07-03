@@ -1,18 +1,32 @@
-// src/app/components/hotel-reviews/reviews.ts
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HotelService, Hotel } from '../../../services/hotel/hotel.service';
-import { ReviewService, Review } from '../../../services/review/review.services';
+import { ReviewService } from '../../../services/review/review.services';
 import { AuthService } from '../../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment';
 
+type Review = {
+  reviewID: number;
+  userID: number;
+  hotelID: number;
+  rating: number;
+  comment: string;
+  timestamp: string;
+  userName?: string;
+};
+
 @Component({
   selector: 'app-reviews',
   templateUrl: './review.html',
   styleUrls: ['./review.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush, // ✅ Use ChangeDetectionStrategy.OnPush for better performance
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [FormsModule, CommonModule],
 })
@@ -29,34 +43,30 @@ export class Reviews implements OnInit {
     private hotelService: HotelService,
     private reviewService: ReviewService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef // ✅ Inject ChangeDetectorRef for manual change detection
-  ) { }
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.hotelID = Number(this.route.snapshot.paramMap.get('hotelID'));
 
     this.hotelService.getHotelById(this.hotelID).subscribe({
       next: (data) => {
-        data.imageUrl = `${environment.apiBaseUrl}${data.imageUrl}`; // ✅ Prefix URL
+        data.imageUrl = data.imageUrl?.startsWith('http')
+          ? data.imageUrl
+          : `${environment.apiBaseUrl}${data.imageUrl}`;
         this.hotel = data;
-        console.log('Hotel info fetched:', this.hotel); // ✅ Console
-        this.cdr.detectChanges(); 
+        this.cdr.markForCheck();
       },
       error: (err) => console.error('Hotel fetch error', err)
     });
 
-    // this.reviewService.getReviewsByHotelId(this.hotelID).subscribe({
-    //   next: (data) => (this.reviews = data),
-    //   error: (err) => console.error('Review fetch error', err)
-    // });
     this.reviewService.getReviewsByHotelId(this.hotelID).subscribe({
       next: (data) => {
         this.reviews = data;
-        console.log('Reviews fetched:', this.reviews); // ✅ Add this line
+        this.cdr.markForCheck();
       },
       error: (err) => console.error('Review fetch error', err)
     });
-    this.cdr.detectChanges(); // ✅ Trigger change detection manually    
   }
 
   addReview(): void {
@@ -67,20 +77,17 @@ export class Reviews implements OnInit {
       rating: this.newRating,
       comment: this.newComment,
       timestamp: new Date().toISOString(),
+      userName: this.authService.getName()
     };
 
     this.reviewService.addReview(review).subscribe({
       next: (data) => {
-        this.reviews.push(data);
+        this.reviews = [...this.reviews, data];
         this.newComment = '';
         this.newRating = 5;
+        this.cdr.markForCheck();
       },
       error: (err) => console.error('Add review error', err)
     });
-    this.cdr.detectChanges(); // ✅ Trigger change detection manually
-  }
-
-  getUserName(): string {
-    return this.authService.getName(); // 👈 Add this in auth.service.ts
   }
 }

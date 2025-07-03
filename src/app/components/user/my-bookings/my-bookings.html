@@ -1,28 +1,17 @@
-<!-- src/app/components/user/my-bookings/my-bookings.html -->
 <div class="container mt-5">
   <h2 class="text-center mb-4">📖 My Bookings</h2>
 
-  <!-- ✅ Use async pipe to unwrap the Observable -->
   <ng-container *ngIf="bookings$ | async as bookings">
-
-    <!-- ✅ Show count -->
-    <!-- <div class="text-center mb-3">
-      <h5>Total Bookings: {{ bookings.length }}</h5>
-    </div> -->
-
-    <!-- ✅ No bookings found -->
     <div *ngIf="bookings.length === 0" class="alert alert-warning text-center">
       No bookings found.
     </div>
 
-    <!-- ✅ Responsive Table -->
     <div *ngIf="bookings.length > 0" class="table-responsive">
       <table class="table table-striped table-hover table-bordered align-middle shadow-sm">
         <thead class="table-dark text-center">
           <tr>
-            <th>Booking ID</th>
-            <th>Hotel ID</th>
-            <th>Room ID</th>
+            <th>Hotel Name</th>
+            <th>Room Type</th>
             <th>Check-In</th>
             <th>Check-Out</th>
             <th>Status</th>
@@ -30,21 +19,18 @@
         </thead>
         <tbody class="text-center">
           <tr *ngFor="let booking of bookings">
-            <td>{{ booking.bookingID }}</td>
-            <td>{{ booking.hotelID }}</td>
-            <td>{{ booking.roomID }}</td>
+            <td>{{ booking.hotelName }}</td>
+            <td>{{ booking.roomType }}</td>
             <td>{{ booking.checkInDate }}</td>
             <td>{{ booking.checkOutDate }}</td>
             <td>
-              <span class="badge"
-                    [ngClass]="booking.status ? 'bg-success' : 'bg-danger'">
-                {{ booking.status ? 'Confirmed' : 'Cancelled' }}
+              <span class="badge" [ngClass]="booking.status === 'Confirmed' ? 'bg-success' : 'bg-danger'">
+                {{ booking.status }}
               </span>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-
   </ng-container>
 </div>

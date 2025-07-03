@@ -1,12 +1,18 @@
-.card {
-    border-radius: 1rem;
-    transition: transform 0.2s ease-in-out;
-}
-
-.card:hover {
-    transform: scale(1.02);
-}
-
-.card-title {
+.table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .badge {
+    font-size: 0.9rem;
+    padding: 0.5em 1em;
+  }
+  
+  h2 {
     font-weight: bold;
-}
+  }
+  
+  .alert {
+    font-size: 1.1rem;
+  }
+  

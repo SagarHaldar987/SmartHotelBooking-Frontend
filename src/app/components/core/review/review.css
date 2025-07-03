@@ -1,0 +1,36 @@
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .card-img-top {
+    height: 300px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .text-warning {
+    font-size: 1.2rem;
+  }
+  
+  textarea.form-control {
+    resize: none;
+  }
+  
+  .btn-success {
+    margin-top: 10px;
+  }
+  
+  h4,
+  h5 {
+    margin-bottom: 1rem;
+  }
+  
+  .me-2 {
+    margin-right: 0.5rem;
+  }
+  

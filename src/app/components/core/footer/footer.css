@@ -1,12 +1,13 @@
 .footer {
-  position: relative;
-  bottom: 0;
   width: 100%;
-  z-index: 10;
+  background-color: #343a40;
+  color: white;
+  padding: 1rem 0;
+  margin-top: auto;
 }
 
 a.text-white:hover {
-  color: #0dcaf0; /* Bootstrap Info Blue */
+  color: #0dcaf0;
   transition: 0.2s ease-in;
 }
 

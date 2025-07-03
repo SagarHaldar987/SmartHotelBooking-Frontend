@@ -10,6 +10,7 @@ export interface Review {
   rating: number;
   comment: string;
   timestamp: string;
+  userName?: string; 
 }
 
 @Injectable({

@@ -1,8 +1,16 @@
-// src/app/components/user/my-bookings/my-bookings.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../../services/booking/booking.service';
 import { Observable } from 'rxjs';
+
+interface Booking {
+  bookingID: number;
+  hotelName: string;
+  roomType: string;
+  checkInDate: string;
+  checkOutDate: string;
+  status: string;
+}
 
 @Component({
   selector: 'app-my-bookings',
@@ -11,8 +19,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./my-bookings.css'],
   imports: [CommonModule],
 })
-export class MyBookings {
-  bookings$!: Observable<any[]>; // ✅ Observable
+export class MyBookings implements OnInit {
+  bookings$!: Observable<Booking[]>;
 
   constructor(private bookingService: BookingService) {}
 
@@ -20,38 +28,3 @@ export class MyBookings {
     this.bookings$ = this.bookingService.getMyBookings();
   }
 }
-
-
-// import { Component, OnInit } from '@angular/core';
-// import { BookingService } from '../../../services/booking/booking.service';
-// import { CommonModule } from '@angular/common';
-
-// @Component({
-//   selector: 'app-my-bookings',
-//   templateUrl: './my-bookings.html',
-//   styleUrls: ['./my-bookings.css'],
-//   imports:[CommonModule],
-//   standalone: true,
-// })
-// export class MyBookings implements OnInit {
-//   bookings: any[] = [];
-
-//   constructor(private bookingService: BookingService) {}
-
-//   ngOnInit(): void {
-//     this.loadBookings();
-//   }
-
-//   loadBookings(): void {
-//     this.bookingService.getMyBookings().subscribe({
-//       next: (data) => {
-//         console.log("✅ My Bookings Data:", data); // Debug
-//         this.bookings = data;
-//       },
-//       error: (err) => {
-//         console.error("❌ Failed to load bookings:", err);
-//       }
-//     });
-//   }
-// }
-
