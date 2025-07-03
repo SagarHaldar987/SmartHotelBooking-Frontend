@@ -71,6 +71,7 @@ export class UpdateHotel implements OnInit {
       rating: this.hotel.rating
     };
   
+    
     this.hotelService.updateHotel(this.hotelID!, this.managerID!, updatedHotel).subscribe({
       next: (response) => {
         alert(response.message || 'Hotel updated successfully!');
@@ -82,23 +83,4 @@ export class UpdateHotel implements OnInit {
       }
     });
   }
-  
-  // onSubmit(): void {
-  //   const formData = new FormData();
-  //   formData.append('name', this.hotel.name);
-  //   formData.append('location', this.hotel.location);
-  //   formData.append('managerID', this.managerID!.toString());
-  //   formData.append('amenities', this.hotel.amenities);
-  //   formData.append('rating', this.hotel.rating.toString());
-
-  //   this.hotelService.updateHotel(this.hotelID!, this.managerID!, formData).subscribe({
-  //     next: (response) => {
-  //       alert(response.message || 'Hotel updated successfully!');
-  //       this.router.navigate(['/manager-dashboard']);
-  //     },
-  //     error: (err) => {
-  //       alert('Failed to update hotel.');
-  //     }
-  //   });
-  // }
 }

@@ -62,7 +62,8 @@ export class AddHotel implements OnInit {
       },
       error: (err) => {
         console.error('❌ Error adding hotel:', err);
-        alert('Something went wrong!');
+        alert('Manager is Already Assigned to a Hotel. Please try again with a different Manager ID.');
+        this.router.navigate(['/manager-dashboard']);
       }
     });
   }
