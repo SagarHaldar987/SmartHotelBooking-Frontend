@@ -11,11 +11,7 @@ export interface Review {
   rating: number;
   comment: string;
   timestamp: string;
-<<<<<<< HEAD
-  userName?: string; 
-=======
   userName?: string;
->>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
 }
  
 @Injectable({

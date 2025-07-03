@@ -52,7 +52,6 @@ export class BookingService {
 
     return this.http.get<any>(`${environment.apiBaseUrl}/Bookings/my`, { headers });
   }
-
 }
 
 

@@ -26,5 +26,6 @@ export class MyBookings implements OnInit {
 
   ngOnInit(): void {
     this.bookings$ = this.bookingService.getMyBookings();
+    console.log('Bookings:', this.bookings$);
   }
 }

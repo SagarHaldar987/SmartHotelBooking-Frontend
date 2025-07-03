@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 // src/app/components/hotel-reviews/reviews.ts
->>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -15,11 +12,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment';
-<<<<<<< HEAD
-
-=======
  
->>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
 type Review = {
   reviewID: number;
   userID: number;
@@ -29,11 +22,7 @@ type Review = {
   timestamp: string;
   userName?: string;
 };
-<<<<<<< HEAD
-
-=======
  
->>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
 @Component({
   selector: 'app-reviews',
   templateUrl: './review.html',
@@ -57,11 +46,7 @@ export class Reviews implements OnInit {
     private authService: AuthService,
     private cdr: ChangeDetectorRef
   ) {}
-<<<<<<< HEAD
-
-=======
  
->>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
   ngOnInit(): void {
     this.hotelID = Number(this.route.snapshot.paramMap.get('hotelID'));
  
@@ -75,11 +60,7 @@ export class Reviews implements OnInit {
       },
       error: (err) => console.error('Hotel fetch error', err)
     });
-<<<<<<< HEAD
-
-=======
  
->>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
     this.reviewService.getReviewsByHotelId(this.hotelID).subscribe({
       next: (data) => {
         this.reviews = data;
