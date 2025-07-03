@@ -1,1 +1,53 @@
-<p>user-data works!</p>
+<div class="container mt-4">
+  <h4 class="mb-3 text-primary">📋 All User Information</h4>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover shadow-sm rounded">
+      <thead class="table-dark text-center">
+        <tr>
+          <th>S.No.</th>
+          <th>User ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Contact Number</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="users.length > 0; else noData">
+        <tr *ngFor="let user of users; let i = index" class="text-center align-middle">
+          <td>{{ i + 1 }}</td>
+          <td>{{ user.userID }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span class="badge" [ngClass]="{
+              'bg-success': user.role === 'User',
+              'bg-info text-dark': user.role === 'Manager',
+              'bg-danger': user.role === 'Admin'
+            }">
+              {{ user.role }}
+            </span>
+          </td>
+          <td>{{ user.contactNumber }}</td>
+          <td>
+            <!--  Edit Button -->
+            <button class="btn btn-outline-primary btn-sm me-2" (click)="onUpdate(user)">
+              Edit
+            </button>
+
+            <!--  Delete Button -->
+            <button *ngIf="user.role !== 'Admin'" class="btn btn-outline-danger btn-sm" (click)="onDelete(user)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p class="text-muted text-center">No user data available.</p>
+  </ng-template>
+</div>

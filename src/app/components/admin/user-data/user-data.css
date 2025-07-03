@@ -1,0 +1,27 @@
+h4 {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.table {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  vertical-align: middle !important;
+}
+
+td .btn {
+  transition: all 0.3s ease;
+}
+
+td .btn:hover {
+  transform: scale(1.1);
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.4em 0.6em;
+  border-radius: 8px;
+}

@@ -21,6 +21,7 @@ import { UpdateHotel } from './components/manager/update-hotel/update-hotel';
 import { Reviews } from './components/core/review/review';
 import { AddManager } from './components/admin/add-manager/add-manager';
 import { AdminDashboard } from './components/admin/admin-dashboard/admin-dashboard';
+import { UpdateUser } from './components/admin/update-user/update-user';
 
 
 
@@ -50,5 +51,6 @@ export const routes: Routes = [
   { path: 'update-hotel', component: UpdateHotel },
   { path: 'admin-dashboard', component: AdminDashboard, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
   { path: 'add-manager', component: AddManager, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
+  { path: 'update-user/:userId', component: UpdateUser, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
   { path: '**', component: PageNotFound },
 ];
