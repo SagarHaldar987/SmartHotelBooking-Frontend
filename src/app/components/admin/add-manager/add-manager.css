@@ -1,0 +1,12 @@
+label {
+  font-weight: bold;
+}
+
+form {
+  max-width: 600px;
+  margin: auto;
+}
+
+button {
+  min-width: 120px;
+}

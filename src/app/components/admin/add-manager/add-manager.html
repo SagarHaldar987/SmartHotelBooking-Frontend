@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Register New Manager</h2>
+
+  <form [formGroup]="managerForm" (ngSubmit)="onSubmit()" class="border p-4 shadow rounded bg-light">
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control" formControlName="email">
+    </div>
+
+    <div class="mb-3">
+      <label>Password</label>
+      <input type="password" class="form-control" formControlName="password">
+    </div>
+
+    <div class="mb-3">
+      <label>Contact Number</label>
+      <input type="text" class="form-control" formControlName="contactNumber">
+    </div>
+
+    <button class="btn btn-success me-2" type="submit">Submit</button>
+    <button class="btn btn-secondary" type="button" (click)="goBack()">Back to Dashboard</button>
+  </form>
+</div>
+

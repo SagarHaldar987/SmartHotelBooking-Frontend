@@ -4,20 +4,14 @@
     <span class="fs-5">Smart-Hotels</span>
   </a>
 
-  <button
-    class="navbar-toggler border-0"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarNav"
-    aria-controls="navbarNav"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+  <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
     <ul class="navbar-nav gap-2">
+      <!-- Displayed to each role -->
       <li class="nav-item">
         <a class="nav-link" routerLink="/home" routerLinkActive="active">🏠 Home</a>
       </li>
@@ -57,6 +51,18 @@
           <a class="nav-link text-danger" (click)="logout()">🚪 Logout</a>
         </li>
       </ng-container>
+
+
+      <!-- Admin Logged In -->
+      <ng-container *ngIf="isLoggedIn && role === 'Admin'">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin-dashboard" routerLinkActive="active">🛠 Admin Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" (click)="logout()">🚪 Logout</a>
+        </li>
+      </ng-container>
+
     </ul>
   </div>
 </nav>

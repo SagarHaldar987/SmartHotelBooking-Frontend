@@ -19,6 +19,12 @@ import { Payment } from './components/user/payment/payment';
 import { AddRoomComponent } from './components/manager/add-room/add-room';
 import { UpdateHotel } from './components/manager/update-hotel/update-hotel';
 import { Reviews } from './components/core/review/review';
+import { AddManager } from './components/admin/add-manager/add-manager';
+import { AdminDashboard } from './components/admin/admin-dashboard/admin-dashboard';
+
+
+
+
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -41,6 +47,8 @@ export const routes: Routes = [
     data: { expectedRole: 'Manager' }
   },
   { path: 'add-room', component: AddRoomComponent, canActivate: [RoleGuard], data: { expectedRole: 'Manager' } },
-  { path: 'update-hotel', component: UpdateHotel},
+  { path: 'update-hotel', component: UpdateHotel },
+  { path: 'admin-dashboard', component: AdminDashboard, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
+  { path: 'add-manager', component: AddManager, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
   { path: '**', component: PageNotFound },
 ];
