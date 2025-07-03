@@ -3,10 +3,23 @@ label {
 }
 
 form {
-  max-width: 600px;
-  margin: auto;
+  max-width: 100%;
+}
+
+input, button {
+  font-size: 0.95rem;
 }
 
 button {
   min-width: 120px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+h2 {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
 }
