@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// src/app/components/hotel-reviews/reviews.ts
+>>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -11,7 +15,11 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment';
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
 type Review = {
   reviewID: number;
   userID: number;
@@ -21,7 +29,11 @@ type Review = {
   timestamp: string;
   userName?: string;
 };
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
 @Component({
   selector: 'app-reviews',
   templateUrl: './review.html',
@@ -34,10 +46,10 @@ export class Reviews implements OnInit {
   hotel!: Hotel;
   reviews: Review[] = [];
   hotelID!: number;
-
+ 
   newRating: number = 5;
   newComment: string = '';
-
+ 
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
@@ -45,10 +57,14 @@ export class Reviews implements OnInit {
     private authService: AuthService,
     private cdr: ChangeDetectorRef
   ) {}
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
   ngOnInit(): void {
     this.hotelID = Number(this.route.snapshot.paramMap.get('hotelID'));
-
+ 
     this.hotelService.getHotelById(this.hotelID).subscribe({
       next: (data) => {
         data.imageUrl = data.imageUrl?.startsWith('http')
@@ -59,7 +75,11 @@ export class Reviews implements OnInit {
       },
       error: (err) => console.error('Hotel fetch error', err)
     });
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> cd9264230e6d96cbfd731f66bd8d082a7be356e3
     this.reviewService.getReviewsByHotelId(this.hotelID).subscribe({
       next: (data) => {
         this.reviews = data;
@@ -68,7 +88,7 @@ export class Reviews implements OnInit {
       error: (err) => console.error('Review fetch error', err)
     });
   }
-
+ 
   addReview(): void {
     const review: Review = {
       reviewID: 0,
@@ -79,7 +99,7 @@ export class Reviews implements OnInit {
       timestamp: new Date().toISOString(),
       userName: this.authService.getName()
     };
-
+ 
     this.reviewService.addReview(review).subscribe({
       next: (data) => {
         this.reviews = [...this.reviews, data];
@@ -91,3 +111,5 @@ export class Reviews implements OnInit {
     });
   }
 }
+ 
+ 
