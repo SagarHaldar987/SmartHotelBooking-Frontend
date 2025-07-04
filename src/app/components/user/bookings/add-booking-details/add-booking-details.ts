@@ -56,14 +56,12 @@ export class AddBookingDetails implements OnInit {
     // ✅ 1. Validation check before making API call
     if (!this.checkInDate || !this.checkOutDate) {
       alert('Please select both check-in and check-out dates.');
-      return; // stop further execution
+      return;
     }
 
     // ✅ 2. Prepare the booking object
     const booking: Booking = {
       roomID: this.roomID,
-      // checkInDate: this.checkInDate,
-      // checkOutDate: this.checkOutDate,
       checkInDate: new Date(this.checkInDate).toISOString(),      // "2025-07-01T00:00:00.000Z"
       checkOutDate: new Date(this.checkOutDate).toISOString(),     // "2025-07-02T00:00:00.000Z"
       status: true // ✅ Must be boolean (NOT "Confirmed")

@@ -6,10 +6,6 @@ import { CookieService } from 'ngx-cookie-service';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
   const token = cookieService.get('token');
-
-  // console.log('AuthInterceptor is running');
-  // console.log('Token from cookie:', token);
-
   if (token) {
     const cloned = req.clone({
       setHeaders: {
@@ -18,6 +14,5 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     });
     return next(cloned);
   }
-
   return next(req);
 };
