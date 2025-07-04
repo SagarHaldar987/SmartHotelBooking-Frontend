@@ -1,37 +1,101 @@
+<!-- src/app/components/registration/registration.html -->
 <div class="container mt-5 mb-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card shadow-lg rounded-4 border-0">
         <div class="card-body p-4">
           <h2 class="text-center mb-4">📝 Register</h2>
-          <form (ngSubmit)="onSubmit()">
-
+         
+          <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate>
+ 
+            <!-- Name -->
             <div class="mb-3">
               <label for="name" class="form-label">👤 Name</label>
-              <input type="text" [(ngModel)]="user.name" name="name" id="name" class="form-control" required />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                [(ngModel)]="user.name"
+                #nameRef="ngModel"
+                required
+                minlength="3"
+              />
+              <small class="text-danger" *ngIf="nameRef.invalid && nameRef.touched">
+                <span *ngIf="nameRef.errors?.['required']">Name is required.</span>
+                <span *ngIf="nameRef.errors?.['minlength']">Name must be at least 3 characters.</span>
+              </small>
             </div>
-
+ 
+            <!-- Email -->
             <div class="mb-3">
               <label for="email" class="form-label">📧 Email</label>
-              <input type="email" [(ngModel)]="user.email" name="email" id="email" class="form-control" required />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                [(ngModel)]="user.email"
+                #emailRef="ngModel"
+                required
+                email
+              />
+              <small class="text-danger" *ngIf="emailRef.invalid && emailRef.touched">
+                <span *ngIf="emailRef.errors?.['required']">Email is required.</span>
+                <span *ngIf="emailRef.errors?.['email']">Invalid email address.</span>
+              </small>
             </div>
-
+ 
+            <!-- Password -->
             <div class="mb-3">
               <label for="password" class="form-label">🔒 Password</label>
-              <input type="password" [(ngModel)]="user.password" name="password" id="password" class="form-control" required />
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                [(ngModel)]="user.password"
+                #passwordRef="ngModel"
+                required
+                minlength="8"
+              />
+              <small class="text-danger" *ngIf="passwordRef.invalid && passwordRef.touched">
+                <span *ngIf="passwordRef.errors?.['required']">Password is required.</span>
+                <span *ngIf="passwordRef.errors?.['minlength']">Minimum 8 characters required.</span>
+              </small>
             </div>
-
+ 
+            <!-- Contact Number -->
             <div class="mb-3">
               <label for="contactNumber" class="form-label">📱 Contact Number</label>
-              <input type="text" [(ngModel)]="user.contactNumber" name="contactNumber" id="contactNumber" class="form-control" />
+              <input
+                type="text"
+                id="contactNumber"
+                name="contactNumber"
+                class="form-control"
+                [(ngModel)]="user.contactNumber"
+                #contactRef="ngModel"
+                pattern="^[0-9]{10}$"
+              />
+              <small class="text-danger" *ngIf="contactRef.invalid && contactRef.touched">
+                <span *ngIf="contactRef.errors?.['pattern']">Enter a valid 10-digit number.</span>
+              </small>
             </div>
-
+ 
+            <!-- Submit Button -->
             <div class="d-grid">
-              <button type="submit" class="btn btn-primary rounded-pill">✅ Register</button>
+              <button
+                type="submit"
+                class="btn btn-primary rounded-pill"
+                [disabled]="form.invalid"
+              >
+                ✅ Register
+              </button>
             </div>
           </form>
-
+ 
           <hr class="my-4" />
+ 
           <p class="text-center">
             Already have an account?
             <a routerLink="/login" class="text-decoration-none">🔑 Log In</a>
@@ -41,21 +105,20 @@
     </div>
   </div>
 </div>
+ 
 
 
 
 
 
-
-
-<!-- <div class="container mt-5">
+<!-- <div class="container mt-5 mb-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
-
       <div class="card shadow-lg rounded-4 border-0">
         <div class="card-body p-4">
           <h2 class="text-center mb-4">📝 Register</h2>
           <form (ngSubmit)="onSubmit()">
+
             <div class="mb-3">
               <label for="name" class="form-label">👤 Name</label>
               <input type="text" [(ngModel)]="user.name" name="name" id="name" class="form-control" required />
@@ -72,13 +135,6 @@
             </div>
 
             <div class="mb-3">
-              <label for="role" class="form-label">👥 Role</label>
-              <select [(ngModel)]="user.role" name="role" id="role" class="form-select">
-                <option value="User">User</option>
-              </select>
-            </div>
-
-            <div class="mb-3">
               <label for="contactNumber" class="form-label">📱 Contact Number</label>
               <input type="text" [(ngModel)]="user.contactNumber" name="contactNumber" id="contactNumber" class="form-control" />
             </div>
@@ -89,13 +145,10 @@
           </form>
 
           <hr class="my-4" />
-
           <p class="text-center">
             Already have an account?
-            
             <a routerLink="/login" class="text-decoration-none">🔑 Log In</a>
           </p>
-
         </div>
       </div>
     </div>

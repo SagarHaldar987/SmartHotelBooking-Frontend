@@ -1,4 +1,90 @@
-<div class="container mt-5">
+<!-- src/app/component/login/login.html -->
+ <div class="container mt-5">
+  <div class="row justify-content-center align-items-center">
+    <!-- Image -->
+    <div class="col-md-6 mb-4">
+      <img
+        src="https://www.shutterstock.com/image-vector/hotel-booking-mobile-phone-easy-600nw-1978894262.jpg"
+        class="img-fluid rounded-4 shadow"
+        alt="Login Illustration"
+      />
+    </div>
+ 
+    <!-- Login Card -->
+    <div class="col-md-5">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4">🔐 Log In</h2>
+ 
+          <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate>
+ 
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">📧 Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                [(ngModel)]="credentials.email"
+                #emailRef="ngModel"
+                required
+                email
+              />
+              <small class="text-danger" *ngIf="emailRef.invalid && emailRef.touched">
+                <span *ngIf="emailRef.errors?.['required']">Email is required.</span>
+                <span *ngIf="emailRef.errors?.['email']">Enter a valid email address.</span>
+              </small>
+            </div>
+ 
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">🔒 Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                [(ngModel)]="credentials.password"
+                #passwordRef="ngModel"
+                required
+                minlength="8"
+              />
+              <small class="text-danger" *ngIf="passwordRef.invalid && passwordRef.touched">
+                <span *ngIf="passwordRef.errors?.['required']">Password is required.</span>
+                <span *ngIf="passwordRef.errors?.['minlength']">Minimum 8 characters required.</span>
+              </small>
+            </div>
+ 
+            <!-- Submit -->
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn btn-success rounded-pill"
+                [disabled]="form.invalid"
+              >
+                ✅ Login
+              </button>
+            </div>
+          </form>
+ 
+          <hr />
+          <p class="text-center mt-3">
+            Don't have an account?
+            <a routerLink="/register" class="text-decoration-none">Register</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="container mt-5">
   <div class="row justify-content-center align-items-center">
     <div class="col-md-6 mb-4">
       <img
@@ -54,4 +140,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
