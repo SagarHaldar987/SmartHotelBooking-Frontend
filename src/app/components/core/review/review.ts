@@ -50,17 +50,21 @@ export class Reviews implements OnInit {
   ngOnInit(): void {
     this.hotelID = Number(this.route.snapshot.paramMap.get('hotelID'));
  
+    // Hotel Detail Section
     this.hotelService.getHotelById(this.hotelID).subscribe({
       next: (data) => {
         data.imageUrl = data.imageUrl?.startsWith('http')
           ? data.imageUrl
-          : `${environment.apiBaseUrl}${data.imageUrl}`;
+          : `${environment.fileBaseUrl}${data.imageUrl}`; // 👈 Change 
         this.hotel = data;
+        console.log('Full hotel object after image processing:', this.hotel); 
         this.cdr.markForCheck();
       },
       error: (err) => console.error('Hotel fetch error', err)
     });
  
+
+    // Hotel Review Section
     this.reviewService.getReviewsByHotelId(this.hotelID).subscribe({
       next: (data) => {
         this.reviews = data;

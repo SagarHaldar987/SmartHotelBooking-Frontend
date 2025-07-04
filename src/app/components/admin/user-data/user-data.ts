@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService, User } from '../../../services/admin/admin.service';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class UserData implements OnInit {
   users: User[] = [];
 
-  constructor(private adminService: AdminService, private router: Router) {}
+  constructor(private adminService: AdminService, private router: Router, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadUsers();
@@ -24,6 +24,7 @@ export class UserData implements OnInit {
       next: (data) => {
         this.users = data;
         console.log('Fetched Users:', data);
+        this.cd.detectChanges(); // 👈 Force Angular to re-render the view
       },
       error: (err) => {
         console.error('Error fetching user data:', err);

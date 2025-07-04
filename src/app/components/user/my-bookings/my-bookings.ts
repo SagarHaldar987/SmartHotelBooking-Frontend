@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../../services/booking/booking.service';
 import { Observable } from 'rxjs';
@@ -22,10 +22,11 @@ interface Booking {
 export class MyBookings implements OnInit {
   bookings$!: Observable<Booking[]>;
 
-  constructor(private bookingService: BookingService) {}
+  constructor(private bookingService: BookingService,  private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.bookings$ = this.bookingService.getMyBookings();
     console.log('Bookings:', this.bookings$);
+    this.cd.detectChanges();
   }
 }
