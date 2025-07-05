@@ -29,7 +29,7 @@ export class ManagerDashboard implements OnInit {
   hotels: Hotel[] = []; // Local array to store hotels
 
   ngOnInit(): void {
-    this.managerId = this.authService.getUserId(); // 🔥 use cookie value
+    this.managerId = this.authService.getUserId();
     this.userRole = this.authService.getRole() || '';
 
     if (this.managerId > 0 && this.userRole === 'Manager') {
@@ -57,45 +57,24 @@ export class ManagerDashboard implements OnInit {
   }
 
   // Delete a Hotel : This method will be called when the delete button is clicked
-deleteHotel(hotelID: number): void {
-  const managerID = this.authService.getUserId();
+  deleteHotel(hotelID: number): void {
+    const managerID = this.authService.getUserId();
 
-  this.hotelService.deleteHotel(hotelID, managerID).subscribe({
-    next: () => {
-      console.log('Hotel deleted successfully');
+    this.hotelService.deleteHotel(hotelID, managerID).subscribe({
+      next: () => {
+        console.log('Hotel deleted successfully');
 
-      // ✅ Re-fetch the hotel list after deletion
-      this.hotels$ = this.hotelService.getHotelsByManagerId(managerID);
+        // ✅ Re-fetch the hotel list after deletion
+        this.hotels$ = this.hotelService.getHotelsByManagerId(managerID);
 
-      // ✅ Manually trigger UI update
-      this.cdr.detectChanges();
-    },
-    error: (error) => {
-      console.error('Error deleting hotel:', error);
-    },
-  });
-}
-
-  // deleteHotel(hotelID: number): void {
-  //   const managerID = this.authService.getUserId();
-  //   console.log(
-  //     'Deleting hotel with ID:',
-  //     hotelID,
-  //     'by manager ID:',
-  //     managerID
-  //   );
-
-  //   this.hotelService.deleteHotel(hotelID, managerID).subscribe({
-  //     next: () => {
-  //       console.log('Hotel deleted successfully');
-  //       this.hotels = this.hotels.filter((hotel) => hotel.hotelID !== hotelID);
-  //       this.cdr.markForCheck(); // Manually trigger change detection
-  //     },
-  //     error: (error) => {
-  //       console.error('Error deleting hotel:', error);
-  //     },
-  //   });
-  // }
+        // ✅ Manually trigger UI update
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error deleting hotel:', error);
+      },
+    });
+  }
 
 
   // Update a Hotel : This method will be called when the update button is clicked

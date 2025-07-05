@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class UserData implements OnInit {
   users: User[] = [];
 
-  constructor(private adminService: AdminService, private router: Router, private cd: ChangeDetectorRef) {}
+  constructor(private adminService: AdminService, private router: Router, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -38,8 +38,7 @@ export class UserData implements OnInit {
         next: () => {
           alert(`User with ID ${user.userID} deleted successfully.`);
           console.log(`Deleted user with ID ${user.userID}`);
-          // ✅ Instantly remove from users array
-          this.users = this.users.filter(u => u.userID !== user.userID);
+          this.loadUsers();
         },
         error: (err) => {
           console.error('Error deleting user:', err);
@@ -50,7 +49,7 @@ export class UserData implements OnInit {
   }
 
   onUpdate(user: User) {
-  console.log('📝 Update clicked for User ID:', user.userID);
-  this.router.navigate(['/update-user', user.userID]);
-}
+    console.log('📝 Update clicked for User ID:', user.userID);
+    this.router.navigate(['/update-user', user.userID]);
+  }
 }
