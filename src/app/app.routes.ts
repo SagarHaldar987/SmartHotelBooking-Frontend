@@ -5,7 +5,6 @@ import { Registration } from './components/registration/registration';
 import { Login } from './components/login/login';
 import { MyBookings } from './components/user/my-bookings/my-bookings';
 import { ManagerDashboard } from './components/manager/manager-dashboard/manager-dashboard';
-import { AuthGuard } from './auth-guard';
 import { RoleGuard } from './role-guard';
 import { Home } from './components/core/home/home';
 import { HotelComponent } from './components/core/hotel/hotel';
@@ -24,10 +23,9 @@ import { AdminDashboard } from './components/admin/admin-dashboard/admin-dashboa
 import { UpdateUser } from './components/admin/update-user/update-user';
 
 
-
-
-
 export const routes: Routes = [
+
+  // Routes accesible to All type of Users.
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: Home },
   { path: 'register', component: Registration },
@@ -35,9 +33,9 @@ export const routes: Routes = [
   { path: 'profile', component: Profile },
   { path: 'hotel', component: HotelComponent },
   { path: 'rooms/:hotelID', component: RoomComponent },
-   { path: 'hotel-reviews/:hotelID', component: Reviews },
+  { path: 'hotel-reviews/:hotelID', component: Reviews },
 
-  // Routes Accesible to User - Customer
+  // Routes Accesible to User : Customer
   { path: 'my-bookings', component: MyBookings, canActivate: [RoleGuard], data: { expectedRole: 'User' } },
   { path: 'bookings/:roomID', component: BookingsComponent, canActivate: [RoleGuard], data: { expectedRole: 'User' } },
   { path: 'add-booking-details', component: AddBookingDetails, canActivate: [RoleGuard], data: { expectedRole: 'User' } },
@@ -53,5 +51,8 @@ export const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboard, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
   { path: 'add-manager', component: AddManager, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
   { path: 'update-user/:userId', component: UpdateUser, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
+
+  // On Trying to access any UnAuthorized route, then re-direct to PageNotFound Page.
   { path: '**', component: PageNotFound },
+
 ];
