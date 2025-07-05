@@ -4,7 +4,7 @@
   <div class="text-center bg-light p-5 rounded shadow-lg mb-5">
     <h1 class="display-4 fw-bold text-primary">Welcome to Smart-Hotels</h1>
     <p class="lead text-secondary">Luxury, comfort, and convenience at your fingertips.</p>
-    <button class="btn btn-primary btn-lg mt-3 px-4" (click)="handleBooking()">Book Your Stay</button>
+    <button class="btn btn-primary btn-lg mt-3 px-4" [disabled]="userRole === 'Admin'" (click)="handleBooking()"  >Book Your Stay</button>
   </div>
 
   <!-- 🏨 Hotel Image Carousel -->
@@ -71,64 +71,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-<!-- <div class="container mt-4">
-
-  Hero Section
-  <div class="text-center bg-light p-5 rounded shadow">
-    <h1 class="display-4 fw-bold">Welcome to Smart-Hotels</h1>
-    <p class="lead">Luxury, comfort, and convenience at your fingertips.</p>
-    <button class="btn btn-primary btn-lg mt-3">
-        <a (click)="handleBooking()" >Book Your Stay</a>
-    </button>
-  </div>
-
-  <div id="hotelCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="d-flex justify-content-center gap-3">
-            <img src="assets/Hotel1.webp" class="d-block w-26 rounded" alt="Hotel 1">
-            <img src="assets/Hotel2.webp" class="d-block w-26 rounded" alt="Hotel 2">
-            <img src="assets/Hotel3.webp" class="d-block w-26 rounded" alt="Hotel 3">
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="d-flex justify-content-center gap-3">
-            <img src="assets/Hotel2.webp" class="d-block w-26 rounded" alt="Hotel 2">
-            <img src="assets/Hotel3.webp" class="d-block w-26 rounded" alt="Hotel 3">
-            <img src="assets/Hotel4.webp" class="d-block w-26 rounded" alt="Hotel 4">
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-    </div>
-
-  Services Section
-  <div class="row text-center mt-5">
-    <div class="col-md-4">
-      <h5>24/7 Support</h5>
-      <p>We're here to help you anytime, anywhere.</p>
-    </div>
-    <div class="col-md-4">
-      <h5>Best Price Guarantee</h5>
-      <p>Find the best deals on luxury stays.</p>
-    </div>
-    <div class="col-md-4">
-      <h5>Easy Booking</h5>
-      <p>Book your stay in just a few clicks.</p>
-    </div>
-  </div>
-</div> -->
