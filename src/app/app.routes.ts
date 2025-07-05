@@ -33,22 +33,23 @@ export const routes: Routes = [
   { path: 'register', component: Registration },
   { path: 'login', component: Login },
   { path: 'profile', component: Profile },
-  { path: 'my-bookings', component: MyBookings, canActivate: [RoleGuard], data: { expectedRole: 'User' } },
-  { path: 'manager-dashboard', component: ManagerDashboard, canActivate: [RoleGuard], data: { expectedRole: 'Manager' } },
   { path: 'hotel', component: HotelComponent },
   { path: 'rooms/:hotelID', component: RoomComponent },
-  { path: 'bookings/:roomID', component: BookingsComponent },
-  { path: 'add-booking-details', component: AddBookingDetails },
-  { path: 'payment', component: Payment },
-  { path: 'hotel-reviews/:hotelID', component: Reviews },
-  {
-    path: 'add-hotel',
-    component: AddHotel,
-    canActivate: [RoleGuard],
-    data: { expectedRole: 'Manager' }
-  },
+   { path: 'hotel-reviews/:hotelID', component: Reviews },
+
+  // Routes Accesible to User - Customer
+  { path: 'my-bookings', component: MyBookings, canActivate: [RoleGuard], data: { expectedRole: 'User' } },
+  { path: 'bookings/:roomID', component: BookingsComponent, canActivate: [RoleGuard], data: { expectedRole: 'User' } },
+  { path: 'add-booking-details', component: AddBookingDetails, canActivate: [RoleGuard], data: { expectedRole: 'User' } },
+  { path: 'payment', component: Payment, canActivate: [RoleGuard], data: { expectedRole: 'User' } },
+ 
+  // Routes Accessible to Manager Only.
+  { path: 'add-hotel', component: AddHotel, canActivate: [RoleGuard], data: { expectedRole: 'Manager' } },
+  { path: 'manager-dashboard', component: ManagerDashboard, canActivate: [RoleGuard], data: { expectedRole: 'Manager' } },
   { path: 'add-room', component: AddRoomComponent, canActivate: [RoleGuard], data: { expectedRole: 'Manager' } },
   { path: 'update-hotel', component: UpdateHotel },
+
+  // Routes Accessible to Admin Only.
   { path: 'admin-dashboard', component: AdminDashboard, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
   { path: 'add-manager', component: AddManager, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
   { path: 'update-user/:userId', component: UpdateUser, canActivate: [RoleGuard], data: { expectedRole: 'Admin' } },
