@@ -43,12 +43,4 @@ export class RoomService {
     return this.http.post<Room>(`${environment.apiBaseUrl}/Rooms`, room);
   }
 
-  // updateRoom(room: Room): Observable<Room> {
-  //   return this.http.put<Room>(`${environment.apiBaseUrl}/Rooms/${room.roomID}`, room);
-  // }
-
-  // deleteRoom(roomID: number): Observable<void> {
-  //   return this.http.delete<void>(`${environment.apiBaseUrl}/Rooms/${roomID}`);
-  // }
-
 }

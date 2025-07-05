@@ -5,13 +5,14 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Observable, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-manager-dashboard',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './manager-dashboard.html',
-  
+
 })
 export class ManagerDashboard implements OnInit {
   hotels$: Observable<Hotel[]> = of([]);
@@ -23,7 +24,7 @@ export class ManagerDashboard implements OnInit {
     private authService: AuthService,
     private router: Router,
     private cdr: ChangeDetectorRef // ChangeDetectorRef to trigger change detection manually
-  ) {}
+  ) { }
 
   hotels: Hotel[] = []; // Local array to store hotels
 
@@ -37,13 +38,9 @@ export class ManagerDashboard implements OnInit {
   }
 
   getImageUrl(path: string): string {
-    return path.startsWith('http') ? path : `http://localhost:5281/${path}`;
+    // return path.startsWith('http') ? path : `http://localhost:5281/${path}`;
+    return path.startsWith('http') ? path : `${environment.fileBaseUrl}${path}`;
   }
-
-  // viewRooms(hotelId: number) {
-  //   // Future logic to view rooms
-  //   console.log('View rooms in hotel', hotelId);
-  // }
 
   // Add a Room to a Hotel
   addRoom(hotelID: number): void {
@@ -60,26 +57,45 @@ export class ManagerDashboard implements OnInit {
   }
 
   // Delete a Hotel : This method will be called when the delete button is clicked
-  deleteHotel(hotelID: number): void {
-    const managerID = this.authService.getUserId();
-    console.log(
-      'Deleting hotel with ID:',
-      hotelID,
-      'by manager ID:',
-      managerID
-    );
+deleteHotel(hotelID: number): void {
+  const managerID = this.authService.getUserId();
 
-    this.hotelService.deleteHotel(hotelID, managerID).subscribe({
-      next: () => {
-        console.log('Hotel deleted successfully');
-        this.hotels = this.hotels.filter((hotel) => hotel.hotelID !== hotelID);
-        this.cdr.markForCheck(); // Manually trigger change detection
-      },
-      error: (error) => {
-        console.error('Error deleting hotel:', error);
-      },
-    });
-  }
+  this.hotelService.deleteHotel(hotelID, managerID).subscribe({
+    next: () => {
+      console.log('Hotel deleted successfully');
+
+      // ✅ Re-fetch the hotel list after deletion
+      this.hotels$ = this.hotelService.getHotelsByManagerId(managerID);
+
+      // ✅ Manually trigger UI update
+      this.cdr.detectChanges();
+    },
+    error: (error) => {
+      console.error('Error deleting hotel:', error);
+    },
+  });
+}
+
+  // deleteHotel(hotelID: number): void {
+  //   const managerID = this.authService.getUserId();
+  //   console.log(
+  //     'Deleting hotel with ID:',
+  //     hotelID,
+  //     'by manager ID:',
+  //     managerID
+  //   );
+
+  //   this.hotelService.deleteHotel(hotelID, managerID).subscribe({
+  //     next: () => {
+  //       console.log('Hotel deleted successfully');
+  //       this.hotels = this.hotels.filter((hotel) => hotel.hotelID !== hotelID);
+  //       this.cdr.markForCheck(); // Manually trigger change detection
+  //     },
+  //     error: (error) => {
+  //       console.error('Error deleting hotel:', error);
+  //     },
+  //   });
+  // }
 
 
   // Update a Hotel : This method will be called when the update button is clicked
