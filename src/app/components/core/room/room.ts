@@ -87,4 +87,21 @@ export class RoomComponent implements OnInit, OnDestroy {
         return '/assets/RoomsImage/default.jpeg'; // Optional: Add a fallback image
     }
   }
+
+  // delete(roomId : number): void {
+  //   if (confirm(`Are you sure you want to delete room with ID: ${roomId}?`)) {
+  //     this.roomService.delete(roomId).subscribe({
+  //       next: () => {
+  //         alert(`Room with ID ${roomId} deleted successfully.`);
+  //         console.log(`Deleted room with ID ${roomId}`);
+  //         this.rooms = this.rooms.filter((room) => room.roomID !== roomId);
+  //         this.cdr.markForCheck(); // Ensure change detection runs
+  //       },
+  //       error: (err : any) => {
+  //         console.error('Error deleting room:', err);
+  //         alert('Cannot Delete.');
+  //       },
+  //     });
+  //   }
+  // }
 }

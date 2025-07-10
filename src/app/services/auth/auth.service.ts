@@ -19,7 +19,7 @@ export class AuthService {
   private role: BehaviorSubject<string>;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
-    // ✅ Initialize BehaviorSubjects after cookieService is available
+    // Initialize BehaviorSubjects after cookieService is available
     this.loggedIn = new BehaviorSubject<boolean>(this.cookieService.check('token'));
     this.role = new BehaviorSubject<string>(this.cookieService.get('role') || '');
   }
@@ -72,7 +72,7 @@ export class AuthService {
   // Get UserId from Cookie
   getUserId(): number {
     const userId = this.cookieService.get('userId');
-    console.log("Fetched userId from cookie:", userId); // ✅ Debug
+    console.log("Fetched userId from cookie:", userId); // Debug
     return userId ? +userId : 0;
   }
 

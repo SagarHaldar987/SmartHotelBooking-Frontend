@@ -4,13 +4,13 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // ✅ Needed for *ngIf
+import { CommonModule } from '@angular/common'; 
  
 @Component({
   selector: 'app-login',
-  standalone: true, // ✅ Required for standalone
+  standalone: true,
   imports: [
-    CommonModule,   // ✅ Enables *ngIf, *ngFor etc.
+    CommonModule, 
     FormsModule,
     RouterModule
   ],

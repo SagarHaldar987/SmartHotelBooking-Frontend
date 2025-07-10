@@ -14,6 +14,7 @@ export interface User {
 @Injectable({
     providedIn: 'root'
 })
+
 export class AdminService {
     constructor(private http: HttpClient) { }
 
@@ -21,7 +22,6 @@ export class AdminService {
     getAllUsers(): Observable<User[]> {
         return this.http.get<User[]>(`${environment.apiBaseUrl}/User`);
     }
-
 
     deleteUser(userId: number): Observable<any> {
         return this.http.delete(`${environment.apiBaseUrl}/User/${userId}`);

@@ -42,7 +42,7 @@ export class UserData implements OnInit {
         },
         error: (err) => {
           console.error('Error deleting user:', err);
-          alert('Failed to delete user.');
+          alert('Cannot Delete.');
         }
       });
     }

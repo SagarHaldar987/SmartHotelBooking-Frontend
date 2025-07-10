@@ -6,7 +6,7 @@
       ➕ Add Hotel
     </button>
   </div>
-
+ 
   <div class="row">
     <ng-container *ngIf="hotels$ | async as hotels; else loading">
       <div *ngIf="hotels.length > 0; else noHotels">
@@ -46,15 +46,15 @@
                 >
                   Add Room
                 </button>
-                
+               
                 <button
                   *ngIf="userRole === 'Manager'"
                   class="btn btn-sm btn-outline-danger me-2"
                   (click)="deleteHotel(hotel.hotelID);  $event.stopPropagation()"
                 >
-                  Delete 
+                  Delete
                 </button>
-
+ 
                 <button
                   *ngIf="userRole === 'Manager'"
                   class="btn btn-sm btn-outline-primary me-2"
@@ -62,16 +62,17 @@
                 >
                    Update
                 </button>
-
+ 
               </div>
             </div>
           </div>
         </div>
       </div>
-
+ 
     </ng-container>
-
+ 
     <ng-template #loading><p>Loading hotels...</p></ng-template>
     <ng-template #noHotels><p>No hotels available.</p></ng-template>
   </div>
 </div>
+ 
